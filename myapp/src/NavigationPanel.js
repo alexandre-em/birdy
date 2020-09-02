@@ -9,7 +9,7 @@ class NavigationPanel extends Component{
 
     render(){
         return <div className='nav-wrapper'>
-                <img alt="" onClick={this.props.home} src={logoB}  width="80" height="80"/>
+                <img className="logo" alt="" onClick={this.props.home} src={logoB}  width="80" height="80"/>
                 <Search profS={this.props.profS} home={this.props.home}/>
                 {this.props.isConnected === false ? <Login log={this.props.log} sign={this.props.signIn}/>: <Logout acc={this.props.username} log={this.props.log} prof={this.props.prof}/> }
             </div>;

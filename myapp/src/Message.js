@@ -10,8 +10,10 @@ class Message extends Component{
         return <div className="msg">
             <article>
                 <span><p>{nc.text}</p></span>
-                <span>{moment(nc.date).format('YYYY-MM-DD')}    </span>
-                <span><a href="test">   {nc.id_author}</a></span>
+                <div className="btn-usr">
+                    <h>{moment(nc.date).format('YYYY-MM-DD')} - </h>
+                    <h onClick={() => this.props.prof(nc.id_author)}>{nc.id_author}</h>
+                </div>
 			</article>
         </div>
     }

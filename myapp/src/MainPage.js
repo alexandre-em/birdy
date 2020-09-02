@@ -75,20 +75,19 @@ class MainPage extends Component {
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <Utilisateur home={this.homeP} connecte={this.state.connecte} acc={this.state.puser} prof={this.profilUser}/>
+                    <Utilisateur home={this.homeP} connecte={this.state.connecte} id={this.state.username} acc={this.state.puser} prof={this.profilUser}/>
                 </div>;
             default:
                 return <div>
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <div className="left"><h1>Stats</h1></div>
                     <div className="main">
                         <div className="mur">
                             <div className="commentaire">
-                                <h1>Bonjour {this.state.username}</h1>
+                                <h1 className="title">Bonjour {this.state.username}</h1>
                                 {this.state.connecte === true ? <FormM username={this.state.username}/>: "" }
-                                <ListeM acc={this.state.username}/>
+                                <ListeM acc={this.state.username} prof={this.profilUser}/>
                             </div>
                         </div>
                     </div>

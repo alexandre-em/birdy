@@ -11,8 +11,8 @@ class Login extends Component{
     }
 
     render(){
-        return <div className="bouton">
-            <button className="connexion" onClick={this.props.log}>Login</button>
+        return <div>
+            <h className="bouton nav-bouton" onClick={this.props.log}>Login</h>
         </div>
     }
 }

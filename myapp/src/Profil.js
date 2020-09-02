@@ -45,18 +45,23 @@ class Profil extends Component{
         return <div className="zentai">
             <div className="left">
                 <div className="infos">
-                    <h1>{this.state.prenom} {this.state.nom}</h1>
+                    <h1 className="title">{this.state.prenom} {this.state.nom}</h1>
+                    <h>@{this.props.acc}</h>
                     <br />
                     Ne le {this.state.dateN}
                     <br />
                     Contact : {this.state.email}
-                    <button onClick={this.switchAmi}>Amis</button>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <h className="bouton ami-btn" onClick={this.switchAmi}>Amis</h>
                 </div>
             </div>
 
             <main>
                 {this.props.connecte === true ? <FormM username={this.props.acc}/>: "" }
-                {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.props.prof} retour={this.switchMsg}/>: <ListeM acc={this.props.acc}/> }
+                {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.props.prof} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.props.prof}/> }
             </main>
         </div>
     }

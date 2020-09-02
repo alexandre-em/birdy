@@ -30,7 +30,7 @@ class ListM extends Component{
     render(){
         var ncl= [];
         for (var index = 0; this.state.lmsg[index]; index++){
-            ncl.push(<Message nc={this.state.lmsg[index]}/>)
+            ncl.push(<Message nc={this.state.lmsg[index]} prof={this.props.prof}/>)
         }
         return <div className="list-msg">
             {ncl}

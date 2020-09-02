@@ -32,7 +32,7 @@ class ListA extends Component{
         return <div>
             <div className="list-ami">{ami}</div>
             <div className="retour">
-                <button onClick={this.props.retour} >Retour</button>
+                <h className="bouton" onClick={this.props.retour} >Retour</h>
             </div>
         </div>
     }

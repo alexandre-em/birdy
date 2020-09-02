@@ -10,9 +10,9 @@ class Logout extends Component{
     }
     
     render(){
-        return <div className="bouton">
-            <button className="profil" onClick={this.props.prof}>Profil</button>
-            <button className="deconnexion" onClick={this.deconnexion}>Logout</button>
+        return <div>
+            <h className="bouton nav-bouton" onClick={this.props.prof}>Profil</h>
+            <h className="bouton nav-bouton" onClick={this.deconnexion}>Logout</h>
         </div>
     }
 }
