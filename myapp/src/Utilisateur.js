@@ -11,7 +11,7 @@ class Utilisateur extends Component{
         this.state={
             nom: "",
             prenom: "",
-            username: "",
+            username: this.props.acc,
             dateN: "",
             email: "",
             ami: false
@@ -20,20 +20,31 @@ class Utilisateur extends Component{
         this.switchMsg = this.switchMsg.bind(this)
     }
 
-    componentWillMount = () => {
+    changeUser = (user) => {
+        this.setState({
+            username: user
+        })
+        this.infoUser()
+    }
+
+    infoUser = () => {
         axios.get("http://localhost:8080/Projet/user", {params:{
-            username: this.props.acc,
+            username: this.state.username,
         }, data:{}})
         .then(response => {
-            this.setState({
+            response.data.code ===undefined ? this.setState({
                 nom: response.data.nom,
                 prenom: response.data.prenom,
                 username: response.data.username,
                 dateN: response.data.dateN,
                 email: response.data.email
-            })
+            }) :alert(response.data.code + ': ' + response.data.mess)
         })
         .catch(errorRep => {alert(errorRep)})
+    }
+
+    componentWillMount = () => {
+        this.infoUser()
     }
 
     switchAmi(){
@@ -64,7 +75,7 @@ class Utilisateur extends Component{
 
             <main>
                 {this.props.connecte === true ? <FormM username={this.props.acc}/>: "" }
-                {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.props.prof} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.props.prof}/> }
+                {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.changeUser}/> }
             </main>
         </div>
     }

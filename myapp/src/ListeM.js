@@ -6,17 +6,16 @@ class ListM extends Component{
     constructor(props){
         super(props);
         this.state={
-            lmsg: [
-                {comment:"Un message", name:"himouto"},
-                {comment: "Un autre message", name: "hito"}]
+            lmsg: []
         }
     }
 
     componentWillMount = () => {
         axios.get("http://localhost:8080/Projet/messages", {params:{
-            id: this.props.acc,
+            mur: this.props.acc,
             request: '',
-            filtre: ''
+            filtre: '',
+            id: ''
         }, data:{}})
         .then(response => {
             var obj=JSON.parse(response.data.id);

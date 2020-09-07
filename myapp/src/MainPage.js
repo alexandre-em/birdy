@@ -15,8 +15,9 @@ class MainPage extends Component {
         this.state = {
             username: "anijya",
             connecte : true,
-            page : 'replyp',
+            page : 'replyP',
             puser: "",
+            idMsg: "5ed6447477283f1b6c3a24e4",
         };
         this.getConnected = this.getConnected.bind(this);
         this.setLogout = this.setLogout.bind(this);
@@ -54,6 +55,10 @@ class MainPage extends Component {
         this.setState({page: 'userp', puser: user})
     }
 
+    replyM = (id) => {
+        this.setState({idMsg: id, page: 'replyP'})
+    }
+
     render() {
         switch(this.state.page){
             case 'enregistrement':
@@ -76,14 +81,14 @@ class MainPage extends Component {
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <Utilisateur home={this.homeP} connecte={this.state.connecte} id={this.state.username} acc={this.state.puser} prof={this.profilUser}/>
+                    <Utilisateur home={this.homeP} connecte={this.state.connecte} id={this.state.username} acc={this.state.puser} />
                 </div>;
-            case 'replyp':
+            case 'replyP':
                 return <div>
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <ReplyPage />
+                    <ReplyPage id={this.state.username} idM={this.state.idMsg} rf={this.replyM}/>
                 </div>
             default:
                 return <div>

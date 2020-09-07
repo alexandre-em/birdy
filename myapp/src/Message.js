@@ -18,7 +18,7 @@ class Message extends Component{
                     </IconButton>
                 </span>
                 <div className="btn-usr" onClick={() => this.props.prof(nc.id_author)}>
-                    <h>{moment(nc.date).format('YYYY-MM-DD')} - </h>
+                    <h>{moment(new Date(nc.date.$date)).format('YYYY-MM-DD H:mm:ss a')} - </h>
                     <h>{nc.id_author}</h>
                 </div>
 			</article>

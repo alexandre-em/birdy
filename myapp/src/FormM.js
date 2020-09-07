@@ -25,7 +25,7 @@ class FormM extends Component{
         formData.append('Message', this.state.contenu);
         formData.append('idmsg', '');
         axios.post("http://localhost:8080/Projet/messages", formData)
-        .then(r => {alert("Message envoye!")})
+        .then(r => {r.data.code !== undefined ? alert(r.data.code + ": " +r.data.mess):alert("Message envoye !")})
         .catch(errorRep => {alert(errorRep)})
     }
 

@@ -17,7 +17,7 @@ public class Messages {
 			else
 				return listMessage(requete, filtre);
 		} else
-			return getMur(id);
+			return getMessage(id);
 	}
 //---------------------------------------------------------------------------------------------------------------------------------------------	
 
