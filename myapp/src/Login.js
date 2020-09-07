@@ -1,18 +1,17 @@
 import React, {Component} from "react"
+import { PowerSettingsNew, VpnKey } from "@material-ui/icons"
+import { IconButton } from "@material-ui/core"
 
 class Login extends Component{
-    constructor(){
-        super();
-        this.connexion=this.connexion.bind(this);
-    }
-
-    connexion(){
-       return this.props.log
-    }
 
     render(){
         return <div>
-            <h className="bouton nav-bouton" onClick={this.props.log}>Login</h>
+            <IconButton>
+                <PowerSettingsNew onClick={this.props.log} fontSize="large"/>
+            </IconButton>
+            <IconButton>
+                <VpnKey onClick={this.props.sign} fontSize="large"/>
+            </IconButton>
         </div>
     }
 }

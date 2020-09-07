@@ -7,6 +7,7 @@ import ListeM from './ListeM'
 import FormM from './FormM'
 import Profil from './Profil'
 import Utilisateur from './Utilisateur';
+import ReplyPage from './ReplyPage';
 
 class MainPage extends Component {
     constructor(){ 
@@ -14,7 +15,7 @@ class MainPage extends Component {
         this.state = {
             username: "anijya",
             connecte : true,
-            page : 'default',
+            page : 'replyp',
             puser: "",
         };
         this.getConnected = this.getConnected.bind(this);
@@ -77,6 +78,13 @@ class MainPage extends Component {
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
                     <Utilisateur home={this.homeP} connecte={this.state.connecte} id={this.state.username} acc={this.state.puser} prof={this.profilUser}/>
                 </div>;
+            case 'replyp':
+                return <div>
+                    <NavigationPanel 
+                        log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
+                        home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
+                    <ReplyPage />
+                </div>
             default:
                 return <div>
                     <NavigationPanel 
@@ -85,9 +93,9 @@ class MainPage extends Component {
                     <div className="main">
                         <div className="mur">
                             <div className="commentaire">
-                                <h1 className="title">Bonjour {this.state.username}</h1>
-                                {this.state.connecte === true ? <FormM username={this.state.username}/>: "" }
-                                <ListeM acc={this.state.username} prof={this.profilUser}/>
+                                <h1 className="title">Bonjour {this.state.username},</h1>
+                                {this.state.connecte === true ? <FormM username={this.state.username}/>: <h2>Veuillez vous connecter ou vous inscrire</h2> }
+                                {this.state.connecte === true ? <ListeM acc={this.state.username} prof={this.profilUser}/>: "" }
                             </div>
                         </div>
                     </div>

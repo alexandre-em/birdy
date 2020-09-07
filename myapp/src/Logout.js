@@ -1,5 +1,7 @@
 import React, {Component} from "react"
 import axios from "axios"
+import { ExitToApp, AccountCircle } from "@material-ui/icons"
+import { IconButton } from "@material-ui/core"
 
 class Logout extends Component{
 
@@ -11,8 +13,12 @@ class Logout extends Component{
     
     render(){
         return <div>
-            <h className="bouton nav-bouton" onClick={this.props.prof}>Profil</h>
-            <h className="bouton nav-bouton" onClick={this.deconnexion}>Logout</h>
+            <IconButton>
+                <AccountCircle onClick={this.props.prof} fontSize="large"/>
+            </IconButton>
+            <IconButton>
+                <ExitToApp onClick={this.deconnexion} fontSize="large"/>
+            </IconButton>
         </div>
     }
 }

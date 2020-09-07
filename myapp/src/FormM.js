@@ -1,5 +1,7 @@
 import React, {Component} from "react"
 import axios from "axios"
+import { Send } from '@material-ui/icons';
+import { IconButton } from '@material-ui/core'
 
 class FormM extends Component{
     constructor(props){
@@ -36,9 +38,10 @@ class FormM extends Component{
                     name="contenu"
                     placeholder="Nouveau message"
                     className="commentbox"
-                    onChange={this.handleChange}/>
-                    <br />
-                <input type="submit" value="Envoyer" />
+                    onChange={this.handleChange} required/>
+                <IconButton type="submit">
+                    <Send color="primary" />
+                </IconButton>
             </form>
         </div>
     }

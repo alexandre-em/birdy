@@ -10,7 +10,3 @@ Site Web de type social inspire de Twitter. (à améliorer)
 ## Pour Lancer/Installer :
 - Bases de données: [Docker](docker/README.md)
 - Lancer le site: [React](myapp/README.md)
-
-## Screenshot :
-
-![screenshot](./myapp/Screenshot.png)
