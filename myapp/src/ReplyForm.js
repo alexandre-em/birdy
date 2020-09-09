@@ -34,7 +34,7 @@ export class ReplyForm extends Component {
         var rep = this.props.rep
         var ar = []
         for (var index = 0; rep[index]; index++){
-            ar.push(<ReplyCtn rep={rep[index]} rf={this.props.rf}/>)
+            ar.push(<ReplyCtn rep={rep[index]} rf={this.props.rf} profS={this.props.profS}/>)
         }
         return (
             <div >

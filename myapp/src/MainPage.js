@@ -8,16 +8,17 @@ import FormM from './FormM'
 import Profil from './Profil'
 import Utilisateur from './Utilisateur';
 import ReplyPage from './ReplyPage';
+import moment from 'moment'
 
 class MainPage extends Component {
     constructor(){ 
         super();
         this.state = {
-            username: "anijya",
-            connecte : true,
-            page : 'replyP',
+            username: "",
+            connecte : false,
+            page : '',
             puser: "",
-            idMsg: "5ed6447477283f1b6c3a24e4",
+            idMsg: "",
         };
         this.getConnected = this.getConnected.bind(this);
         this.setLogout = this.setLogout.bind(this);
@@ -74,35 +75,36 @@ class MainPage extends Component {
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <Profil home={this.homeP} connecte={this.state.connecte} acc={this.state.username} prof={this.profilUser}/>
+                    <Profil home={this.homeP} connecte={this.state.connecte} acc={this.state.username} prof={this.profilUser} rep={this.replyM}/>
                 </div>;
             case 'userp':
                 return <div>
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <Utilisateur home={this.homeP} connecte={this.state.connecte} id={this.state.username} acc={this.state.puser} />
+                    <Utilisateur home={this.homeP} connecte={this.state.connecte} id={this.state.username} acc={this.state.puser} rep={this.replyM}/>
                 </div>;
             case 'replyP':
                 return <div>
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <ReplyPage id={this.state.username} idM={this.state.idMsg} rf={this.replyM}/>
+                    <ReplyPage id={this.state.username} idM={this.state.idMsg} profS={this.profilUser}/>
                 </div>
             default:
                 return <div>
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <div className="main">
-                        <div className="mur">
-                            <div className="commentaire">
-                                <h1 className="title">Bonjour {this.state.username},</h1>
-                                {this.state.connecte === true ? <FormM username={this.state.username}/>: <h2>Veuillez vous connecter ou vous inscrire</h2> }
-                                {this.state.connecte === true ? <ListeM acc={this.state.username} prof={this.profilUser}/>: "" }
+                    <div className="rep">
+                        <div className="rep-msg">
+                            <div className="rep-ctn title wel-tit">
+                                <h1>Bonjour {this.state.username},</h1>
                             </div>
+                            <div className="rep-date">{moment(new Date()).format('YYYY-MM-DD H:mm')}</div>
                         </div>
+                        {this.state.connecte === true ? <FormM username={this.state.username}/>: <h2 className="rep-ctn">Veuillez vous connecter ou vous inscrire pour voir les messages</h2> }
+                        {this.state.connecte === true ? <ListeM acc={this.state.username} prof={this.profilUser} rep={this.replyM}/>: "" }
                     </div>
                  </div>;
         }

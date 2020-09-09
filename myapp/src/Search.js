@@ -1,6 +1,9 @@
 import React, {Component} from 'react'
+import SearchIcon from "@material-ui/icons/Search"
+import { Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
 
 class Search extends Component {
+    
     constructor(){
         super()
         this.state = {
@@ -34,11 +37,24 @@ class Search extends Component {
     render(){
         return <div className="search">
                 <input type="search" name="search" onChange={this.handleChange} placeholder="Rechercher"/>
-                <select name="search" id="search" onChange={(event) => this.changeFiltre(event)}>
-                    <option value="idUser">id user</option>
-                    <option value="message">Message</option>
-                </select>
-                <button onClick={this.handleSubmit}>Search</button>
+                <FormControl variant="outlined" className="search">
+                    <InputLabel id="demo-simple-select-outlined-label">Filtre</InputLabel>
+                    <Select
+                        id="search"
+                        onChange={(event) => this.changeFiltre(event)}
+                        label="Age"
+                        >
+                        <MenuItem value="idUser">id user</MenuItem>
+                        <MenuItem value="message">Message</MenuItem>
+                    </Select>
+                </FormControl>
+
+                <Button
+                    variant="outlined"
+                    color="default"
+                    onClick={this.handleSubmit}
+                    startIcon={<SearchIcon />}
+                />
             </div>
     }
 }

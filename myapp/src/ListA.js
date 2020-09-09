@@ -15,9 +15,9 @@ class ListA extends Component{
             id: this.props.acc,
         }, data:{}})
         .then(response => {
-            this.setState({
+            response.data.code === undefined ? this.setState({
                 lami: response.data.id.slice(1,-1)
-            })
+            }) : alert(response.data.code + ': ' + response.data.mess)
         })
         .catch(errorRep => {alert(errorRep)})
     }
@@ -32,7 +32,7 @@ class ListA extends Component{
         return <div>
             <div className="list-ami">{ami}</div>
             <div className="retour">
-                <h className="bouton" onClick={this.props.retour} >Retour</h>
+                <div className="bouton" onClick={this.props.retour} >Retour</div>
             </div>
         </div>
     }

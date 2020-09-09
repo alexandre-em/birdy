@@ -23,12 +23,13 @@ class Profil extends Component{
             username: this.props.acc,
         }, data:{}})
         .then(response => {
+            response.data.code === undefined ?
             this.setState({
                 nom: response.data.nom,
                 prenom: response.data.prenom,
                 dateN: response.data.dateN,
                 email: response.data.email
-            })
+            }) :alert(response.data.code + ': ' + response.data.mess)
         })
         .catch(errorRep => {alert(errorRep)})
     }
@@ -43,26 +44,31 @@ class Profil extends Component{
 
     render(){
         return <div className="zentai">
-            <div className="left">
-                <div className="infos">
-                    <h1 className="title">{this.state.prenom} {this.state.nom}</h1>
-                    <h>@{this.props.acc}</h>
-                    <br />
-                    Ne le {this.state.dateN}
-                    <br />
-                    Contact : {this.state.email}
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <h className="bouton ami-btn" onClick={this.switchAmi}>Amis</h>
+            <div className="prof-page">
+                <div className="left">
+                    <div className="infos">
+                        <h1 className="title">{this.state.prenom} {this.state.nom}</h1>
+                        <i>@{this.props.acc}</i>
+                        <br />
+                        Ne le {this.state.dateN}
+                        <br />
+                        Contact : {this.state.email}
+                        <div className="bouton ami-btn" onClick={this.switchAmi}>Amis</div>
+                    </div>
+                </div>
+
+                <div className="main">
+                    <div className="mur">
+                        <div className="rep-msg">
+                            <div className="rep-ctn title wel-tit">
+                                {this.state.ami === true ? <h1>Ma liste d'amis</h1>:<h1>Mon mur</h1>}
+                            </div>
+                        </div>
+                        {(this.props.connecte === true) && (this.state.ami !== true) ? <FormM username={this.props.acc}/>: "" }
+                        {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.props.prof} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.props.prof} rep={this.props.rep}/> }
+                    </div>
                 </div>
             </div>
-
-            <main>
-                {this.props.connecte === true ? <FormM username={this.props.acc}/>: "" }
-                {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.props.prof} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.props.prof}/> }
-            </main>
         </div>
     }
 }

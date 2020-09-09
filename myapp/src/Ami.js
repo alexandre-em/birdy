@@ -30,7 +30,7 @@ class Ami extends Component{
             <div className="ami">
                 <div className="name">
                     <p> {this.state.prenom} <b>{this.state.nom}</b></p>
-                    <p className="btn-usr" onClick={() => this.props.prof(this.state.id)}>{this.state.id}</p>
+                    <p className="btn-usr" onClick={() => this.props.prof(this.state.id)}>@{this.state.id}</p>
                 </div>
             </div>
         </div>

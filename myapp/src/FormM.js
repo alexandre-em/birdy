@@ -37,7 +37,7 @@ class FormM extends Component{
                     value={this.state.contenu} 
                     name="contenu"
                     placeholder="Nouveau message"
-                    className="commentbox"
+                    className="rep-w"
                     onChange={this.handleChange} required/>
                 <IconButton type="submit">
                     <Send color="primary" />

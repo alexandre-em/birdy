@@ -16,11 +16,11 @@ export class ReplyCtn extends Component {
                         <Reply />
                     </IconButton>
                 </div>
-                <div className="rep-aut">
-                    {rps.id_author}
+                <div className="rep-aut" onClick={() => this.props.profS(rps.id_author)}>
+                    @{rps.id_author}
                 </div>
                 <div className="rep-date">
-                    {moment(rps.date.$date).format('YYYY-MM-DD H:mm:ss a')}
+                    {moment(rps.date.$date).format('YYYY-MM-DD H:mm:ss')}
                 </div>
             </div>
         )

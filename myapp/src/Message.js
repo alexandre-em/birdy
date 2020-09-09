@@ -9,19 +9,21 @@ class Message extends Component{
 
     render(){
         var nc = this.props.nc;
-        return <div className="msg">
-            <article>
-                <span className="msg-content">
-                    {nc.text}
-                    <IconButton>
-                        <Reply />
-                    </IconButton>
-                </span>
-                <div className="btn-usr" onClick={() => this.props.prof(nc.id_author)}>
-                    <h>{moment(new Date(nc.date.$date)).format('YYYY-MM-DD H:mm:ss a')} - </h>
-                    <h>{nc.id_author}</h>
-                </div>
-			</article>
+        return <div className="rep-rep">
+            <div className="rep-ctn">
+                {nc.text}
+            </div>
+            <div className="rep-btn">
+                <IconButton onClick={() => this.props.rep(nc._id.$oid)}>
+                    <Reply />
+                </IconButton>
+            </div>
+            <div className="rep-aut" onClick={() => this.props.prof(nc.id_author)}>
+                @{nc.id_author}
+            </div>
+            <div className="rep-date">
+                {moment(nc.date.$date).format('YYYY-MM-DD H:mm:ss')}
+            </div>
         </div>
     }
 }

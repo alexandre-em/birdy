@@ -5,9 +5,14 @@ import { IconButton } from "@material-ui/core"
 
 class Logout extends Component{
 
+    disconnect = () => {
+        this.props.log(); 
+        alert("Deconnecte")
+    }
+
     deconnexion = () => {
         axios.delete("http://localhost:8080/Projet/login?login="+this.props.acc)
-        .then(r => {this.props.log(); alert("Deconnecte")})
+        .then(r => {r.data.code === undefined ? this.disconnect() : alert(r.data.code + ': ' + r.data.mess)})
         .catch(errorRep => {alert(errorRep)})
     }
     

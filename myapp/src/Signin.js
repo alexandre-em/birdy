@@ -24,6 +24,11 @@ handleChange(event){
     })
 }
 
+creation = () => {
+    this.props.home(); 
+    alert("Compte cree")
+}
+
 handleSubmit(event){
     event.preventDefault();
     const formData = new URLSearchParams();
@@ -34,7 +39,7 @@ handleSubmit(event){
     formData.append('mail', this.state.email);
     formData.append('dateNaissance', this.state.dateN);
     axios.post("http://localhost:8080/Projet/user", formData)
-    .then(r => {this.props.home(); alert("Compte cree")})
+    .then(r => {r.data.code === undefined ? this.creation() :alert(r.data.code + ': ' + r.data.mess)})
     .catch(errorRep => {alert(errorRep)})
 }
 

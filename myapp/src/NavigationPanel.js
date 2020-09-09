@@ -11,7 +11,9 @@ class NavigationPanel extends Component{
         return <div className='nav-wrapper'>
                 <img className="logo" alt="" onClick={this.props.home} src={logoB}  width="80" height="80"/>
                 <Search profS={this.props.profS} home={this.props.home}/>
-                {this.props.isConnected === false ? <Login log={this.props.log} sign={this.props.signIn}/>: <Logout acc={this.props.username} log={this.props.log} prof={this.props.prof}/> }
+                <div className="nav-icon" >
+                    {this.props.isConnected === false ? <Login log={this.props.log} sign={this.props.signIn}/>: <Logout acc={this.props.username} log={this.props.log} prof={this.props.prof}/> }
+                </div>
             </div>;
     }
 }

@@ -25,7 +25,7 @@ class FormLog extends Component{
         formData.append('login', this.state.username);
         formData.append('password', this.state.password);
         axios.post("http://localhost:8080/Projet/login", formData)
-        .then(r => {this.traitementReponse(r)})
+        .then(r => {r.data.code === undefined ? this.traitementReponse(r):alert(r.data.code + ': ' + r.data.mess)})
         .catch(errorRep => {alert(errorRep)})
     }
 

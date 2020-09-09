@@ -22,7 +22,8 @@ class Utilisateur extends Component{
 
     changeUser = (user) => {
         this.setState({
-            username: user
+            username: user,
+            ami: false
         })
         this.infoUser()
     }
@@ -35,7 +36,6 @@ class Utilisateur extends Component{
             response.data.code ===undefined ? this.setState({
                 nom: response.data.nom,
                 prenom: response.data.prenom,
-                username: response.data.username,
                 dateN: response.data.dateN,
                 email: response.data.email
             }) :alert(response.data.code + ': ' + response.data.mess)
@@ -57,26 +57,33 @@ class Utilisateur extends Component{
 
     render(){
         return <div className="zentai">
-            <div className="left">
-                <div className="infos">
-                    <h1 className="title">{this.state.prenom} {this.state.nom}</h1>
-                    <h>@{this.state.username}</h>
-                    <br />
-                    Ne le {this.state.dateN}
-                    <br />
-                    Contact : {this.state.email}
-                    <br />
-                    <br />
-                    <br />
-                    {this.props.id !== this.state.username ? <AddF acc={this.props.acc} btn={this.switchAmi} idF={this.state.username} /> : 
-                    <h className="bouton ami-btn" onClick={this.switchAmi}>Amis</h> }
+            <div className="prof-page">
+                <div className="left">
+                    <div className="infos">
+                        <h1 className="title">{this.state.prenom} {this.state.nom}</h1>
+                        <h>@{this.state.username}</h>
+                        <br />
+                        Ne le {this.state.dateN}
+                        <br />
+                        Contact : {this.state.email}
+                        {this.props.id !== this.state.username ? 
+                        <AddF id={this.props.id} btn={this.switchAmi} acc={this.state.username} /> : 
+                        <div className="bouton ami-btn" onClick={this.switchAmi}>Amis</div> }
+                    </div>
+                </div>
+
+                <div className="main">
+                    <div className="mur">
+                        <div className="rep-msg">
+                            <div className="rep-ctn title wel-tit">
+                                {this.state.ami === true ? <h1>Liste Amis de {this.state.username}</h1>:<h1>Mur de {this.state.username}</h1>}
+                            </div>
+                        </div>
+                        {(this.props.connecte === true) && (this.state.ami !== true) ? <FormM username={this.props.acc}/>: "" }
+                        {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.changeUser} rep={this.props.rep}/> }
+                    </div>
                 </div>
             </div>
-
-            <main>
-                {this.props.connecte === true ? <FormM username={this.props.acc}/>: "" }
-                {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.changeUser}/> }
-            </main>
         </div>
     }
 }
