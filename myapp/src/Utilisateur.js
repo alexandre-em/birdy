@@ -79,7 +79,6 @@ class Utilisateur extends Component{
                                 {this.state.ami === true ? <h1>Liste Amis de {this.state.username}</h1>:<h1>Mur de {this.state.username}</h1>}
                             </div>
                         </div>
-                        {(this.props.connecte === true) && (this.state.ami !== true) ? <FormM username={this.props.acc}/>: "" }
                         {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.changeUser} rep={this.props.rep}/> }
                     </div>
                 </div>

@@ -30,6 +30,7 @@ body{
 .search
 {
     display: flex;
+    font-size:xx-large;
 }
 
 .logo

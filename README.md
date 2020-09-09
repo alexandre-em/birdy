@@ -1,6 +1,6 @@
 # バーディ
 
-Site Web de type social inspire de Twitter. (à améliorer)
+Site Web de type social inspire de Twitter en monopage. (à améliorer)
 
 ## Technologies utilisé :
 - Coté serveur : Java, MySql, MongoDB, Tomcat

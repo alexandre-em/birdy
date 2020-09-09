@@ -16,7 +16,7 @@ class MainPage extends Component {
         this.state = {
             username: "",
             connecte : false,
-            page : 'toconnect',
+            page : '',
             puser: "",
             idMsg: "",
         };

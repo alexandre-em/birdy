@@ -1,15 +1,16 @@
 import React, {Component} from "react"
 import axios from 'axios'
-import { FormControl, InputLabel, OutlinedInput, Button } from "@material-ui/core";
+import { FormControl, InputLabel, OutlinedInput, Button, InputAdornment, IconButton } from "@material-ui/core";
 import './login.css';
-import { LockOpen, VpnKey } from "@material-ui/icons";
+import { LockOpen, VpnKey, Visibility, VisibilityOff } from "@material-ui/icons";
 
 class FormLog extends Component{
     constructor(props){
         super(props);
         this.state = {
             username: "",
-            password: ""
+            password: "",
+            showPassword: false,
         }
         this.handleChange = this.handleChange.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
@@ -20,6 +21,16 @@ class FormLog extends Component{
         this.setState({
             [name]: value
         })
+    }
+
+    handleClickShowPassword = () => {
+        this.setState({
+            showPassword: !this.state.showPassword
+        })
+    }
+    
+    handleMouseDownPassword = (event) => {
+        event.preventDefault()
     }
     
     handleSubmit(event){
@@ -56,8 +67,28 @@ class FormLog extends Component{
                         </div>
                         <div className="log-inp">
                         <FormControl variant="outlined">
-                            <InputLabel htmlFor="component-outlined">password</InputLabel>
-                            <OutlinedInput id="outlined-password-input" value={this.state.password} autoComplete="current-password" type="password" name="password" onChange={this.handleChange} label="Password" required/>
+                            <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                            <OutlinedInput
+                                id="outlined-adornment-password"
+                                type={this.state.showPassword ? 'text' : 'password'}
+                                value={this.state.password}
+                                name="password"
+                                onChange={this.handleChange}
+                                endAdornment={
+                                <InputAdornment position="end">
+                                    <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={this.handleClickShowPassword}
+                                    onMouseDown={this.handleMouseDownPassword}
+                                    edge="end"
+                                    >
+                                    {this.state.showPassword ? <Visibility /> : <VisibilityOff />}
+                                    </IconButton>
+                                </InputAdornment>
+                                }
+                                labelWidth={75}
+                                required
+                            />
                         </FormControl>
                         </div>
                         <div className="log-inp">

@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
-import SearchIcon from "@material-ui/icons/Search"
-import { Button, FormControl, InputLabel, Select, MenuItem } from '@material-ui/core'
+import { FormControl, InputLabel, Select, MenuItem, TextField } from '@material-ui/core'
 
 class Search extends Component {
     
     constructor(){
         super()
         this.state = {
-            filtre : "",
+            filtre : "idUser",
             search: "",
         }
     }
@@ -16,15 +15,17 @@ class Search extends Component {
         this.setState({filtre : event.target.value})
     }
 
-    handleSubmit = () => {
+    handleSubmit = (event) => {
+        event.preventDefault();
         switch(this.state.filtre){
             case 'message':
-                console.log("En Construction")
+                alert("En Construction")
                 break
             default:
                 this.props.profS(this.state.search)
                 break
         }
+        this.setState({search: ""})
     }
 
     handleChange = (event) => {
@@ -36,25 +37,22 @@ class Search extends Component {
 
     render(){
         return <div className="search">
-                <input type="search" name="search" onChange={this.handleChange} placeholder="Rechercher"/>
-                <FormControl variant="outlined" className="search">
-                    <InputLabel id="demo-simple-select-outlined-label">Filtre</InputLabel>
-                    <Select
-                        id="search"
-                        onChange={(event) => this.changeFiltre(event)}
-                        label="Age"
-                        >
-                        <MenuItem value="idUser">id user</MenuItem>
-                        <MenuItem value="message">Message</MenuItem>
-                    </Select>
-                </FormControl>
-
-                <Button
-                    variant="outlined"
-                    color="default"
-                    onClick={this.handleSubmit}
-                    startIcon={<SearchIcon />}
-                />
+                <form onSubmit={(e) => this.handleSubmit(e)}>
+                    <TextField id="outlined-search" name="search" label="Search field" type="search" variant="outlined" value={this.state.search} onKeyDown={e => {if (e.key === 'Enter') {
+            this.handleSubmit(e)}}} onChange={this.handleChange}/>
+                    <FormControl variant="outlined" >
+                        <InputLabel id="demo-simple-select-outlined-label">Filtre</InputLabel>
+                        <Select
+                            id="search"
+                            value={this.state.filtre}
+                            onChange={(event) => this.changeFiltre(event)}
+                            label="Filtre"
+                            >
+                            <MenuItem value="idUser">id user</MenuItem>
+                            <MenuItem value="message">Message</MenuItem>
+                        </Select>
+                    </FormControl>
+                </form>
             </div>
     }
 }
