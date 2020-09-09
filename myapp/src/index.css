@@ -114,26 +114,6 @@ body{
     
 }
 
-.list-msg
-{
-    width: 82%;
-}
-
-.msg
-{
-    border: 1px;
-    color: rgb(61, 93, 105);
-    background-color: rgb(183, 205, 214);
-    border-radius: .5em .5em .5em .5em;
-    text-indent: 40px;
-    margin-bottom: 1.5%;
-}
-
-.msg-content {
-    justify-content: space-between;
-    display: flex;
-}
-
 .rep {
     background-color: rgb(183, 205, 214);
     margin-top: 50px;

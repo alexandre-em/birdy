@@ -1,5 +1,8 @@
 import React, {Component} from "react"
 import axios from 'axios'
+import { FormControl, InputLabel, OutlinedInput, Button } from "@material-ui/core";
+import './login.css';
+import { LockOpen, VpnKey } from "@material-ui/icons";
 
 class FormLog extends Component{
     constructor(props){
@@ -39,29 +42,44 @@ class FormLog extends Component{
     }
 
     render(){
-        return <div className="login">
-            <h1>Connexion</h1>
-            <h2>Bonjour {this.state.username}</h2>
-            <form onSubmit={(event) => this.handleSubmit(event)}>
-                Id <input 
-                    type="text"
-                    value={this.state.username}
-                    name="username"
-                    placeholder="username"
-                    className="inputLog"
-                    onChange={this.handleChange} required/>
-                    <br />
-                Mot de Passe <input 
-                    type="password"
-                    value={this.state.password}
-                    name="password"
-                    placeholder="password"
-                    className="inputLog"
-                    onChange={this.handleChange} required/>
-                    <br />
-                    <input type="submit" value="Log in"/>
-                    <button onClick={this.props.sign}>s'inscrire</button>
-            </form>
+        return <div className="log">
+            <div className="log-body">
+                <div className="log-hd">
+                    <h1 className="title wel-tit">User login</h1>
+                </div>
+                    <form onSubmit={(event) => this.handleSubmit(event)}>
+                        <div className="log-inp">
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="component-outlined">id</InputLabel>
+                            <OutlinedInput id="component-outlined" value={this.state.username} name="username" onChange={this.handleChange} label="Name" required/>
+                        </FormControl>
+                        </div>
+                        <div className="log-inp">
+                        <FormControl variant="outlined">
+                            <InputLabel htmlFor="component-outlined">password</InputLabel>
+                            <OutlinedInput id="outlined-password-input" value={this.state.password} autoComplete="current-password" type="password" name="password" onChange={this.handleChange} label="Password" required/>
+                        </FormControl>
+                        </div>
+                        <div className="log-inp">
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                type="submit"
+                                startIcon={<LockOpen />}
+                            >
+                                Login
+                            </Button>
+                            <Button
+                                variant="contained"
+                                color="primary"
+                                onClick={this.props.sign}
+                                startIcon={<VpnKey />}
+                            >
+                                Sign up
+                            </Button>
+                        </div>
+                    </form>
+            </div>
         </div>
     }
 }
