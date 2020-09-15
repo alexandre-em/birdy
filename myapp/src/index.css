@@ -51,6 +51,7 @@ body{
     outline: none;
     width: fit-content;
     height: fit-content;
+    transition: 120ms;
     cursor: pointer;
 }
 
@@ -139,6 +140,7 @@ body{
     display: flex;
     position: relative;
     background-color: rgb(147, 181, 194);
+    min-height: 50px;
     height: fit-content;
     padding-bottom: 5vh;
     margin-left: 5%;
@@ -171,6 +173,7 @@ body{
     color:white;
     background-color: rgb(118, 168, 202);
     cursor:pointer;
+    transition: 120ms;
 }
 
 .rep-aut:focus, .rep-aut:hover {
@@ -202,7 +205,7 @@ body{
 .rep-date {
     position: absolute;
     font-style: italic;
-    bottom: 5px;
+    bottom: 0px;
     right: 10px;
     color:rgb(216, 214, 214);
 }

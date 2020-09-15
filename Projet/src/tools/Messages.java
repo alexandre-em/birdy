@@ -164,7 +164,7 @@ public class Messages {
 				l.add((String) lj.get(i));
 		}
 		if (!state)
-			l.add(like(id).toString());
+			l.add(id);
 		System.out.println(state+" "+l);
 		MongoDatabase db = Database.getMongoDBConnection();
 		MongoCollection<Document> coll = db.getCollection(messaget);

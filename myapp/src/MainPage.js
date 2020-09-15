@@ -14,8 +14,8 @@ class MainPage extends Component {
     constructor(){ 
         super();
         this.state = {
-            username: "",
-            connecte : false,
+            username: "otojya",
+            connecte : true,
             page : '',
             puser: "",
             idMsg: "",
@@ -75,21 +75,21 @@ class MainPage extends Component {
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <Profil home={this.homeP} connecte={this.state.connecte} acc={this.state.username} prof={this.profilUser} rep={this.replyM}/>
+                    <Profil home={this.homeP} connecte={this.state.connecte} logout={this.setLogout} acc={this.state.username} prof={this.profilUser} rep={this.replyM}/>
                 </div>;
             case 'userp':
                 return <div>
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <Utilisateur home={this.homeP} connecte={this.state.connecte} id={this.state.username} acc={this.state.puser} rep={this.replyM}/>
+                    <Utilisateur home={this.homeP} connecte={this.state.connecte} logout={this.setLogout} id={this.state.username} acc={this.state.puser} rep={this.replyM}/>
                 </div>;
             case 'replyP':
                 return <div>
                     <NavigationPanel 
                         log={this.setLogout} isConnected={this.state.connecte} username={this.state.username} 
                         home={this.homeP} signIn={this.signIn} prof={this.profil} profS={this.profilUser}/>
-                    <ReplyPage id={this.state.username} idM={this.state.idMsg} profS={this.profilUser}/>
+                    <ReplyPage id={this.state.username} logout={this.setLogout} idM={this.state.idMsg} profS={this.profilUser}/>
                 </div>
             default:
                 return <div>
@@ -103,8 +103,8 @@ class MainPage extends Component {
                             </div>
                             <div className="rep-date">{moment(new Date()).format('YYYY-MM-DD H:mm')}</div>
                         </div>
-                        {this.state.connecte === true ? <FormM username={this.state.username}/>: <h2 className="rep-ctn">Veuillez vous connecter ou vous inscrire pour voir les messages</h2> }
-                        {this.state.connecte === true ? <ListeM acc={this.state.username} prof={this.profilUser} rep={this.replyM}/>: "" }
+                        {this.state.connecte === true ? <FormM logout={this.setLogout} username={this.state.username}/>: <h2 className="rep-ctn">Veuillez vous connecter ou vous inscrire pour voir les messages</h2> }
+                        {this.state.connecte === true ? <ListeM acc={this.state.username} prof={this.profilUser} rep={this.replyM} logout={this.setLogout}/>: "" }
                     </div>
                  </div>;
         }

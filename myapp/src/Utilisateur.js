@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import ListeM from './ListeM'
-import FormM from './FormM'
 import ListA from './ListA'
 import AddF from './AddF'
 import axios from 'axios'
@@ -67,8 +66,8 @@ class Utilisateur extends Component{
                         <br />
                         Contact : {this.state.email}
                         {this.props.id !== this.state.username ? 
-                        <AddF id={this.props.id} btn={this.switchAmi} acc={this.state.username} /> : 
-                        <div className="bouton ami-btn" onClick={this.switchAmi}>Amis</div> }
+                        <AddF id={this.props.id} btn={this.switchAmi} acc={this.state.username} logout={this.props.logout}/> : 
+                        <div className="bouton ami-btn" onClick={this.switchAmi}>Followers</div> }
                     </div>
                 </div>
 
@@ -76,10 +75,10 @@ class Utilisateur extends Component{
                     <div className="mur">
                         <div className="rep-msg">
                             <div className="rep-ctn title wel-tit">
-                                {this.state.ami === true ? <h1>Liste Amis de {this.state.username}</h1>:<h1>Mur de {this.state.username}</h1>}
+                                {this.state.ami === true ? <h1>Followers de {this.state.username}</h1>:<h1>Mur de {this.state.username}</h1>}
                             </div>
                         </div>
-                        {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.changeUser} rep={this.props.rep}/> }
+                        {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.changeUser} rep={this.props.rep} logout={this.props.setLogout}/> }
                     </div>
                 </div>
             </div>

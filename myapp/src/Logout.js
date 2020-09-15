@@ -18,11 +18,11 @@ class Logout extends Component{
     
     render(){
         return <div>
-            <IconButton>
-                <AccountCircle onClick={this.props.prof} fontSize="large"/>
+            <IconButton onClick={this.props.prof}>
+                <AccountCircle fontSize="large"/>
             </IconButton>
-            <IconButton>
-                <ExitToApp onClick={this.deconnexion} fontSize="large"/>
+            <IconButton onClick={this.deconnexion}>
+                <ExitToApp fontSize="large"/>
             </IconButton>
         </div>
     }

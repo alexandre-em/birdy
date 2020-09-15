@@ -57,7 +57,7 @@ export class ReplyPage extends Component {
                         <div className="rep-date">{moment(this.state.date).format('YYYY-MM-DD H:mm:ss a')}</div>
                     </div>
                 </div>
-                <ReplyForm id={this.props.id} idM={this.state.idM} rep={this.state.rep} rf={this.updateState} profS={this.props.profS}/>
+                <ReplyForm logout={this.setLogout} id={this.props.id} idM={this.state.idM} rep={this.state.rep} rf={this.updateState} profS={this.props.profS}/>
             </div>
         )
     }

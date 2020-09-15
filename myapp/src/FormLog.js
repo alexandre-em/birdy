@@ -33,12 +33,12 @@ class FormLog extends Component{
         event.preventDefault()
     }
     
-    handleSubmit(event){
+    async handleSubmit(event){
         event.preventDefault();
         const formData = new URLSearchParams();
         formData.append('login', this.state.username);
         formData.append('password', this.state.password);
-        axios.post("http://localhost:8080/Projet/login", formData)
+        await axios.post("http://localhost:8080/Projet/login", formData)
         .then(r => {r.data.code === undefined ? this.traitementReponse(r):alert(r.data.code + ': ' + r.data.mess)})
         .catch(errorRep => {alert(errorRep)})
     }

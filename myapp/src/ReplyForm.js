@@ -19,6 +19,22 @@ export class ReplyForm extends Component {
         })
     }
 
+    timeOut= () => {
+        this.props.logout();
+        alert("[Time out] Deconnecte !")
+    }
+
+    delete = (idM) => {
+        axios.delete("http://localhost:8080/Projet/messages?idMessage=" + idM + "&id=" + this.props.id)
+        .then(r => 
+            {r.data.code !== undefined ? 
+                (r.data.code === "458"? 
+                    this.timeOut()
+                    :alert(r.data.code+": "+r.data.mess))
+                :alert("Message supprime")})
+        .catch(errorRep => {alert(errorRep)})
+    }
+
     handleSubmit= (event) => {
         event.preventDefault();
         const formData = new URLSearchParams();
@@ -26,7 +42,7 @@ export class ReplyForm extends Component {
         formData.append('Message', this.state.contenu);
         formData.append('idmsg', this.props.idM);
         axios.post("http://localhost:8080/Projet/messages", formData)
-        .then(r => {r.data.code !== undefined ? alert(r.data.code + ": " +r.data.mess):alert("Message envoye !")})
+        .then(r => {r.data.code !== undefined ? (r.data.code === "458"? this.timeOut():alert(r.data.code + ": " +r.data.mess)):alert("Message envoye !")})
         .catch(errorRep => {alert(errorRep)})
     }
 
@@ -34,7 +50,7 @@ export class ReplyForm extends Component {
         var rep = this.props.rep
         var ar = []
         for (var index = 0; rep[index]; index++){
-            ar.push(<ReplyCtn rep={rep[index]} rf={this.props.rf} profS={this.props.profS}/>)
+            ar.push(<ReplyCtn rep={rep[index]} rf={this.props.rf} profS={this.props.profS} id={this.props.id} del={this.delete}/>)
         }
         return (
             <div >

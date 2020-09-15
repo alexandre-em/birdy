@@ -178,7 +178,6 @@ public class Messages {
 				return tools.ErrorJSON.serviceRefused("Non Connecte", "07");
 			}if (tools.Authentification.verifLimit(id)) {
 				tools.Authentification.envoieAction(id);
-				tools.Messages.checkIdMsg(idmsg, id);
 				return new JSONObject(tools.Messages.setLike(id, idmsg));
 			}else {
 				tools.Authentification.logout(id);

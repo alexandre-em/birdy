@@ -10,7 +10,12 @@ class ListM extends Component{
         }
     }
 
+
     componentWillMount = () => {
+        this.getLMsg()
+    }
+
+    getLMsg = () => {
         axios.get("http://localhost:8080/Projet/messages", {params:{
             mur: this.props.acc,
             request: '',
@@ -25,10 +30,21 @@ class ListM extends Component{
         .catch(errorRep => {alert(errorRep)})
     }
 
+    delete = (idM) => {
+        axios.delete("http://localhost:8080/Projet/messages?idMessage=" + idM + "&id=" + this.props.acc)
+        .then(r => 
+            {r.data.code !== undefined ? 
+                (r.data.code === "458"? 
+                    this.timeOut()
+                    :alert(r.data.code+": "+r.data.mess))
+                :this.getLMsg()})
+        .catch(errorRep => {alert(errorRep)})
+    }
+
     render(){
         var ncl= [];
         for (var index = 0; this.state.lmsg[index]; index++){
-            ncl.push(<Message nc={this.state.lmsg[index]} prof={this.props.prof} rep={this.props.rep}/>)
+            ncl.push(<Message acc={this.props.acc} nc={this.state.lmsg[index]} prof={this.props.prof} rep={this.props.rep} logout={this.props.logout} del={this.delete}/>)
         }
         return <div>
             {ncl}
