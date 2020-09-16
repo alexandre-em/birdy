@@ -3,6 +3,7 @@ import ListeM from './ListeM'
 import ListA from './ListA'
 import AddF from './AddF'
 import axios from 'axios'
+import RmF from "./RmF"
 
 class Utilisateur extends Component{
     constructor(props){
@@ -13,10 +14,25 @@ class Utilisateur extends Component{
             username: this.props.acc,
             dateN: "",
             email: "",
-            ami: false
+            ami: false,
+            addBtn: false
         }
         this.switchAmi = this.switchAmi.bind(this)
         this.switchMsg = this.switchMsg.bind(this)
+    }
+
+    isFriend = () => {
+        axios.get("http://localhost:8080/Projet/friends", {params:{
+            id: this.props.id,
+        }, data:{}})
+        .then(response => {
+            var lami= response.data.id
+            response.data.code ===undefined ?
+            this.setState({
+                addBtn: lami.includes(this.props.acc)
+            }) :alert(response.data.code + ': ' + response.data.mess)
+        })
+        .catch(errorRep => {alert(errorRep)})
     }
 
     changeUser = (user) => {
@@ -44,6 +60,7 @@ class Utilisateur extends Component{
 
     componentWillMount = () => {
         this.infoUser()
+        this.isFriend()
     }
 
     switchAmi(){
@@ -66,8 +83,10 @@ class Utilisateur extends Component{
                         <br />
                         Contact : {this.state.email}
                         {this.props.id !== this.state.username ? 
-                        <AddF id={this.props.id} btn={this.switchAmi} acc={this.state.username} logout={this.props.logout}/> : 
-                        <div className="bouton ami-btn" onClick={this.switchAmi}>Followers</div> }
+                            (this.state.addBtn? 
+                                <RmF id={this.props.id} acc={this.state.username}/> :
+                                <AddF id={this.props.id} btn={this.switchAmi} acc={this.state.username} logout={this.props.logout}/> ) : 
+                            <div className="bouton ami-btn" onClick={this.switchAmi}>Followers</div> }
                     </div>
                 </div>
 
@@ -78,7 +97,7 @@ class Utilisateur extends Component{
                                 {this.state.ami === true ? <h1>Followers de {this.state.username}</h1>:<h1>Mur de {this.state.username}</h1>}
                             </div>
                         </div>
-                        {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.changeUser} rep={this.props.rep} logout={this.props.setLogout}/> }
+                        {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM like={this.props.id} acc={this.props.acc} prof={this.changeUser} rep={this.props.rep} logout={this.props.setLogout}/> }
                     </div>
                 </div>
             </div>

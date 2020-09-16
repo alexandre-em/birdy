@@ -10,6 +10,10 @@ class ListM extends Component{
         }
     }
 
+    timeOut= () => {
+        this.props.logout();
+        alert("[Time out] Deconnecte !")
+    }
 
     componentWillMount = () => {
         this.getLMsg()
@@ -31,7 +35,7 @@ class ListM extends Component{
     }
 
     delete = (idM) => {
-        axios.delete("http://localhost:8080/Projet/messages?idMessage=" + idM + "&id=" + this.props.acc)
+        axios.delete("http://localhost:8080/Projet/messages?idMessage=" + idM + "&id=" + this.props.acc+"&idRep=")
         .then(r => 
             {r.data.code !== undefined ? 
                 (r.data.code === "458"? 
@@ -44,7 +48,7 @@ class ListM extends Component{
     render(){
         var ncl= [];
         for (var index = 0; this.state.lmsg[index]; index++){
-            ncl.push(<Message acc={this.props.acc} nc={this.state.lmsg[index]} prof={this.props.prof} rep={this.props.rep} logout={this.props.logout} del={this.delete}/>)
+            ncl.push(<Message acc={this.props.acc} nc={this.state.lmsg[index]} prof={this.props.prof} rep={this.props.rep} logout={this.props.logout} del={this.delete} like={this.props.like}/>)
         }
         return <div>
             {ncl}

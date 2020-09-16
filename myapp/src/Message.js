@@ -31,7 +31,7 @@ class Message extends Component{
         }, data:{}})
         .then(response => { response.data.code === undefined ?
             this.setState({
-                like: response.data.like.includes(this.props.acc),
+                like: response.data.like.includes(this.props.like),
                 lusr: response.data.like
             }) :alert(response.data.code + ': ' + response.data.mess)
         })
@@ -39,7 +39,7 @@ class Message extends Component{
     }
 
     like = async () => {
-        await axios.put("http://localhost:8080/Projet/messages?idmsg=" + this.props.nc._id.$oid + "&id=" + this.props.acc)
+        await axios.put("http://localhost:8080/Projet/messages?idmsg=" + this.props.nc._id.$oid + "&id=" + this.props.like)
         .then(r => 
             {r.data.code !== undefined ? 
                 (r.data.code === "458"? 

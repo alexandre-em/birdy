@@ -44,9 +44,10 @@ public class Messages extends HttpServlet  {
 	public void doDelete(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		PrintWriter writer = res.getWriter();
 		String id = req.getParameter("id");
-		String input = req.getParameter("idMessage");
+		String idMsg = req.getParameter("idMessage");
+		String idRep = req.getParameter("idRep");
 		
-		JSONObject j = services.Messages.removeMessage(id, input);
+		JSONObject j = services.Messages.deleteMessageRep(id, idMsg, idRep);
 		writer.println(j);
 	}
 }

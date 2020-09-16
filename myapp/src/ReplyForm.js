@@ -25,7 +25,7 @@ export class ReplyForm extends Component {
     }
 
     delete = (idM) => {
-        axios.delete("http://localhost:8080/Projet/messages?idMessage=" + idM + "&id=" + this.props.id)
+        axios.delete("http://localhost:8080/Projet/messages?idMessage=" + this.props.idM + "&id=" + this.props.id+"&idRep="+ idM)
         .then(r => 
             {r.data.code !== undefined ? 
                 (r.data.code === "458"? 

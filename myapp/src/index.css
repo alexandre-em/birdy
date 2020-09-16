@@ -68,6 +68,14 @@ body{
     border-radius: 25px 25px 25px 25px;
 }
 
+.unfollow {
+    background-color: rgb(189, 55, 55);
+}
+
+.unfollow:hover, .unfollow:focus {
+    background-color: rgb(129, 55, 55);
+}
+
 .zentai
 {
     display: grid;

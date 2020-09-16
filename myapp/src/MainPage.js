@@ -14,8 +14,8 @@ class MainPage extends Component {
     constructor(){ 
         super();
         this.state = {
-            username: "otojya",
-            connecte : true,
+            username: localStorage.getItem('username') || '',
+            connecte : JSON.parse(localStorage.getItem('connecte')) || false,
             page : '',
             puser: "",
             idMsg: "",
@@ -25,22 +25,25 @@ class MainPage extends Component {
         this.signIn = this.signIn.bind(this);
         this.homeP = this.homeP.bind(this);
         this.profil = this.profil.bind(this);
+
     }
 
     changeUsername = (log) => {
-        this.setState({
-            username: log
-        })
+        localStorage.setItem("username", log)
+        this.setState({username: log})
     }
 
     homeP(){
         this.setState({page: 'default'})
     }
     getConnected() {
+        localStorage.setItem("connecte", 'true')
         this.setState({connecte: true, page: 'home'});
     }
 
     setLogout() {
+        localStorage.removeItem("username")
+        localStorage.removeItem("connecte")
         this.setState({connecte: false, page: 'toconnect'});
     }
 
@@ -104,7 +107,7 @@ class MainPage extends Component {
                             <div className="rep-date">{moment(new Date()).format('YYYY-MM-DD H:mm')}</div>
                         </div>
                         {this.state.connecte === true ? <FormM logout={this.setLogout} username={this.state.username}/>: <h2 className="rep-ctn">Veuillez vous connecter ou vous inscrire pour voir les messages</h2> }
-                        {this.state.connecte === true ? <ListeM acc={this.state.username} prof={this.profilUser} rep={this.replyM} logout={this.setLogout}/>: "" }
+                        {this.state.connecte === true ? <ListeM acc={this.state.username} prof={this.profilUser} rep={this.replyM} logout={this.setLogout} like={this.state.username}/>: "" }
                     </div>
                  </div>;
         }

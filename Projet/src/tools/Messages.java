@@ -142,6 +142,24 @@ public class Messages {
 		return rep.toJson();
 	}
 	
+	public static String deleteReply (String id, String idRep) throws JSONException {
+		String s = rechercheMessageId(id);
+		JSONObject j = new JSONObject(s);
+		JSONArray lj = j.getJSONArray(comment);
+		List<String> l = new ArrayList<>();
+		for (int i=0 ; i<lj.length(); i++) {
+			if (!lj.getString(i).contains(idRep))
+				l.add((String) lj.get(i));
+		}
+		MongoDatabase db = Database.getMongoDBConnection();
+		MongoCollection<Document> coll = db.getCollection(messaget);
+		Document dm = new Document().append(msgid, new ObjectId(id));
+		Document rep = coll.find(dm).first();
+		rep.append(comment, l);
+		coll.replaceOne(coll.find(dm).first(), rep);
+		return rep.toJson();
+	}
+	
 	public static JSONObject like(String id) throws JSONException {
 		GregorianCalendar  calendar =new java.util.GregorianCalendar () ;
 		JSONObject like = new JSONObject();

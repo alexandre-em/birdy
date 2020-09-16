@@ -21,6 +21,15 @@ public class Messages {
 	}
 //---------------------------------------------------------------------------------------------------------------------------------------------	
 
+	public static JSONObject deleteMessageRep(String id, String idMsg, String idRep) {
+		if (idRep.isBlank()) {
+			return removeMessage(id, idMsg);
+		} else
+			return deleteReply(id, idMsg, idRep);
+	}
+//---------------------------------------------------------------------------------------------------------------------------------------------	
+
+	
 	public static JSONObject getMur(String id) {
 		try {
 			List<String> amis = tools.Friends.getFriendList(id);
@@ -128,6 +137,28 @@ public class Messages {
 			if (tools.Authentification.verifLimit(id)) {
 				tools.Authentification.envoieAction(id);
 				return new JSONObject(tools.Messages.replyMessage(id, idmsg, content));
+			}else
+				return tools.ErrorJSON.serviceRefused("time out", "458");
+		} catch (SQLException e) {
+			return tools.ErrorJSON.serviceRefused(e.getMessage(), e.getErrorCode()+"");
+		} catch (JSONException e) {
+			return tools.ErrorJSON.serviceRefused(e.getMessage(), "46");
+		} catch (Exception e) {
+			return tools.ErrorJSON.serviceRefused(e.getMessage(), "457");
+		}
+	}
+	
+//---------------------------------------------------------------------------------------------------------------------------------------------
+
+	public static JSONObject deleteReply(String id, String idMsg ,String idRep) {
+		try {
+			if((!tools.Authentification.isConnecte(id))) {
+				return tools.ErrorJSON.serviceRefused("Non Connecte", "07");
+			}
+			if (tools.Authentification.verifLimit(id)) {
+				tools.Authentification.envoieAction(id);
+				removeMessage(id, idRep);
+				return new JSONObject(tools.Messages.deleteReply(idMsg, idRep));
 			}else
 				return tools.ErrorJSON.serviceRefused("time out", "458");
 		} catch (SQLException e) {
