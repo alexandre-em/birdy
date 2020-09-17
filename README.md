@@ -10,3 +10,5 @@ Site Web de type social inspire de Twitter en monopage. (à améliorer)
 ## Pour Lancer/Installer :
 - Bases de données: [Docker](docker/README.md)
 - Lancer le site: [React](myapp/README.md)
+
+![](birdy.gif)

@@ -104,7 +104,7 @@ body{
 
 .main
 {
-    display: flex;
+    display: flexbox;
     flex-direction: column;
     padding-left: 8%;
     margin-right: 5vw;
