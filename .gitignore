@@ -1,0 +1,4 @@
+/myapp/node_modules
+/docker/data
+.project
+.settings

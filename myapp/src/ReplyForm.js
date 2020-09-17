@@ -44,6 +44,9 @@ export class ReplyForm extends Component {
         axios.post("http://localhost:8080/Projet/messages", formData)
         .then(r => {r.data.code !== undefined ? (r.data.code === "458"? this.timeOut():alert(r.data.code + ": " +r.data.mess)):alert("Message envoye !")})
         .catch(errorRep => {alert(errorRep)})
+        this.setState({
+            contenu: ""
+        })
     }
 
     render() {

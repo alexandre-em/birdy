@@ -3,6 +3,14 @@ import ListeM from './ListeM'
 import FormM from './FormM'
 import ListA from './ListA'
 import axios from 'axios'
+import { Avatar } from "@material-ui/core"
+
+const avStyle = {
+    backgroundColor: "rgb(129, 55, 55)", 
+    width: "150px", 
+    height: "150px",
+    fontSize: "50pt",
+}
 
 class Profil extends Component{
     constructor(props){
@@ -47,6 +55,7 @@ class Profil extends Component{
             <div className="prof-page">
                 <div className="left">
                     <div className="infos">
+                        <Avatar style={avStyle}>{this.props.acc.charAt(0).toUpperCase()}</ Avatar>
                         <h1 className="title">{this.state.prenom} {this.state.nom}</h1>
                         <i>@{this.props.acc}</i>
                         <br />

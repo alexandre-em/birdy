@@ -49,11 +49,11 @@ export class ReplyPage extends Component {
             <div className="rep">
                 <div className="rep-msg">
                     <div className="rep-ctn">
-                        <div className="rep-aut" onClick={() => this.props.profS(this.props.id)}>
+                        <div className="rep-aut" onClick={() => this.props.profS(this.state.idA)}>
                             @{this.state.idA}
                         </div>
-                        <h2>Réponse à :</h2>   
-                        <p>{this.state.msg}</p>    
+                        <h2 style={{fontStyle: "oblique"}}>Réponse à :</h2>
+                        <h3>{this.state.msg}</h3>    
                         <div className="rep-date">{moment(this.state.date).format('YYYY-MM-DD H:mm:ss a')}</div>
                     </div>
                 </div>

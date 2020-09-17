@@ -26,7 +26,7 @@ class ListA extends Component{
         var larray=this.state.lami.split(", ")
         var ami=[];
         for (var index = 0; larray[index]; index++){
-            ami.push(<Ami ami={larray[index]} prof={this.props.prof} retour={this.props.retour}/>)
+            ami.push(<Ami key={larray[index]} ami={larray[index]} prof={this.props.prof} retour={this.props.retour}/>)
         }
         
         return <div>

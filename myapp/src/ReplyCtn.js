@@ -1,8 +1,18 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { IconButton } from '@material-ui/core'
+import { Avatar, IconButton } from '@material-ui/core'
 import { Reply, FavoriteBorder, Favorite, Delete } from '@material-ui/icons'
 import axios from 'axios'
+
+const colorRand = [
+    {backgroundColor: "rgb(197, 114, 19)"},
+    {backgroundColor: "rgb(197, 179, 19)"},
+    {backgroundColor: "rgb(84, 197, 19)"},
+    {backgroundColor: "rgb(19, 197, 159)"},
+    {backgroundColor: "rgb(19, 161, 197)"},
+]
+
+const colorProf = {backgroundColor: "rgb(129, 55, 55)"}
 
 export class ReplyCtn extends Component {
     constructor(props){
@@ -50,7 +60,8 @@ export class ReplyCtn extends Component {
         return (
             <div className="rep-rep">
                 <div className="rep-ctn">
-                    {this.state.rps.text}
+                <Avatar style={this.state.rps.id_author === this.props.id ? colorProf : colorRand[Math.round((Math.random() * (colorRand.length-1)))]}>{this.state.rps.id_author.charAt(0).toUpperCase()}</Avatar>
+                <p>{this.state.rps.text}</p>
                 </div>
                 <div className="rep-btn">
                     {this.state.rps.id_author === this.props.id ?

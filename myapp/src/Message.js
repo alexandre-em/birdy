@@ -1,8 +1,18 @@
 import React, {Component} from "react"
 import moment from 'moment'
 import { Reply, Favorite, FavoriteBorder, Delete } from "@material-ui/icons"
-import { IconButton } from "@material-ui/core"
+import { Avatar, IconButton } from "@material-ui/core"
 import axios from 'axios'
+
+const colorRand = [
+    {backgroundColor: "rgb(197, 114, 19)"},
+    {backgroundColor: "rgb(197, 179, 19)"},
+    {backgroundColor: "rgb(84, 197, 19)"},
+    {backgroundColor: "rgb(19, 197, 159)"},
+    {backgroundColor: "rgb(19, 161, 197)"},
+]
+
+const colorProf = {backgroundColor: "rgb(129, 55, 55)"}
 
 class Message extends Component{
     constructor(props){
@@ -53,10 +63,11 @@ class Message extends Component{
         var nc = this.props.nc;
         return <div className="rep-rep">
             <div className="rep-ctn">
-                {nc.text}
+                <Avatar style={nc.id_author === this.props.like ? colorProf : colorRand[Math.round((Math.random() * (colorRand.length-1)))]}>{nc.id_author.charAt(0).toUpperCase()}</Avatar>
+                <p>{nc.text}</p>
             </div>
             <div className="rep-btn">
-                {nc.id_author === this.props.acc ?
+                {nc.id_author === this.props.like ?
                 <IconButton onClick={() => this.props.del(this.props.nc._id.$oid)}>
                     <Delete />
                 </IconButton>:""}

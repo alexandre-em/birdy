@@ -48,7 +48,7 @@ class ListM extends Component{
     render(){
         var ncl= [];
         for (var index = 0; this.state.lmsg[index]; index++){
-            ncl.push(<Message acc={this.props.acc} nc={this.state.lmsg[index]} prof={this.props.prof} rep={this.props.rep} logout={this.props.logout} del={this.delete} like={this.props.like}/>)
+            ncl.push(<Message key={this.state.lmsg[index]._id.$oid} acc={this.props.acc} nc={this.state.lmsg[index]} prof={this.props.prof} rep={this.props.rep} logout={this.props.logout} del={this.delete} like={this.props.like}/>)
         }
         return <div>
             {ncl}
