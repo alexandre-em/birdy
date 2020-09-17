@@ -2,7 +2,7 @@
 
 Site Web de type social inspire de Twitter en monopage. (à améliorer)
 
-## Technologies utilisé :
+## Technologies utilisées :
 - Coté serveur : Java, MySql, MongoDB, Tomcat
 - Coté client : HTML, CSS, React
 
@@ -11,4 +11,6 @@ Site Web de type social inspire de Twitter en monopage. (à améliorer)
 - Bases de données: [Docker](docker/README.md)
 - Lancer le site: [React](myapp/README.md)
 
+
+## Demo
 ![](birdy.gif)
