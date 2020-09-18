@@ -1,4 +1,4 @@
-## Installation
+# Installation
 
 Creation et initialisation des bases de donnees.
 Deploiement du programme dans le serveur Tomcat.
@@ -19,7 +19,7 @@ $ docker-compose up -d
 $ docker-compose down
 ```
 
-## Bases de données
+# Bases de données
 
 Le fichier de création des tables SQL(*version mySql: 1.7*) sont dans [create.sql](/docker/mysql/create.sql), avec les tables suivantes :
 
