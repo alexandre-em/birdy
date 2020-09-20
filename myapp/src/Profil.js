@@ -1,6 +1,5 @@
 import React, {Component} from "react"
 import ListeM from './ListeM'
-import FormM from './FormM'
 import ListA from './ListA'
 import axios from 'axios'
 import { Avatar } from "@material-ui/core"
@@ -73,8 +72,7 @@ class Profil extends Component{
                                 {this.state.ami === true ? <h1>Mes Followers</h1>:<h1>Mon mur</h1>}
                             </div>
                         </div>
-                        {(this.props.connecte === true) && (this.state.ami !== true) ? <FormM username={this.props.acc} logout={this.props.setLogout}/>: "" }
-                        {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.props.prof} retour={this.switchMsg}/>: <ListeM acc={this.props.acc} prof={this.props.prof} rep={this.props.rep} logout={this.props.setLogout} like={this.props.acc}/> }
+                        {this.state.ami === true ? <ListA acc={this.props.acc} prof={this.props.prof} retour={this.switchMsg}/>: <ListeM canSend={true} acc={this.props.acc} prof={this.props.prof} rep={this.props.rep} logout={this.props.setLogout} like={this.props.acc}/> }
                     </div>
                 </div>
             </div>

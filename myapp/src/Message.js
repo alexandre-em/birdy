@@ -63,7 +63,7 @@ class Message extends Component{
         var nc = this.props.nc;
         return <div className="rep-rep">
             <div className="rep-ctn">
-                <Avatar style={nc.id_author === this.props.like ? colorProf : colorRand[Math.round((Math.random() * (colorRand.length-1)))]}>{nc.id_author.charAt(0).toUpperCase()}</Avatar>
+                <Avatar style={nc.id_author === this.props.like ? colorProf : colorRand[nc.id_author.charCodeAt(0)%5]}>{nc.id_author.charAt(0).toUpperCase()}</Avatar>
                 <p>{nc.text}</p>
             </div>
             <div className="rep-btn">

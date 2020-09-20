@@ -14,23 +14,6 @@ const colorRand = [
     "rgb(19, 161, 197)",
 ]
 
-const avStyleProf = () => {
-    return {
-        backgroundColor: "rgb(129, 55, 55)", 
-        width: "150px", 
-        height: "150px",
-        fontSize: "50pt",
-    }
-}
-
-const avStyle = () => {
-    return {
-        backgroundColor: colorRand[Math.round((Math.random() * (colorRand.length-1)))], 
-        width: "150px", 
-        height: "150px",
-        fontSize: "50pt",
-}}
-
 class Utilisateur extends Component{
     constructor(props){
         super(props);
@@ -43,12 +26,39 @@ class Utilisateur extends Component{
             ami: false,
             addBtn: false,
             avatar: this.props.acc === this.props.id? 
-                avStyleProf()
-                :avStyle()
+                    {
+                        backgroundColor: "rgb(129, 55, 55)", 
+                        width: "150px", 
+                        height: "150px",
+                        fontSize: "50pt",
+                    }:{
+                        backgroundColor: colorRand[this.props.acc.charCodeAt(0)%5], 
+                        width: "150px", 
+                        height: "150px",
+                        fontSize: "50pt",
+                    }
         }
         this.switchAmi = this.switchAmi.bind(this)
         this.switchMsg = this.switchMsg.bind(this)
     }
+
+
+    avStyleProf = () => {
+        return {
+            backgroundColor: "rgb(129, 55, 55)", 
+            width: "150px", 
+            height: "150px",
+            fontSize: "50pt",
+        }
+    }
+
+    avStyle = (user) => {
+        return {
+            backgroundColor: colorRand[user.charCodeAt(0)%5], 
+            width: "150px", 
+            height: "150px",
+            fontSize: "50pt",
+    }}
 
     isFriend = () => {
         axios.get("http://localhost:8080/Projet/friends", {params:{
@@ -69,8 +79,8 @@ class Utilisateur extends Component{
             username: user,
             ami: false,
             avatar: user === this.props.id? 
-                avStyleProf()
-                :avStyle()
+                this.avStyleProf()
+                :this.avStyle(user)
         })
         this.isFriend()
         this.infoUser()
@@ -131,7 +141,7 @@ class Utilisateur extends Component{
                                 {this.state.ami === true ? <h1>Followers de {this.state.username}</h1>:<h1>Mur de {this.state.username}</h1>}
                             </div>
                         </div>
-                        {this.state.ami === true ? <ListA acc={this.state.username} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM like={this.props.id} acc={this.props.acc} prof={this.changeUser} rep={this.props.rep} logout={this.props.setLogout}/> }
+                        {this.state.ami === true ? <ListA acc={this.state.username} prof={this.changeUser} retour={this.switchMsg}/>: <ListeM canSend={this.props.id === this.state.username} like={this.props.id} acc={this.props.acc} prof={this.changeUser} rep={this.props.rep} logout={this.props.setLogout}/> }
                     </div>
                 </div>
             </div>

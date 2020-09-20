@@ -29,6 +29,11 @@ export class ReplyCtn extends Component {
 
     }
 
+    timeOut= () => {
+        this.props.logout();
+        alert("[Time out] Deconnecte !")
+    }
+
     infos = () => {
         axios.get("http://localhost:8080/Projet/messages", {params:{
             mur: '',

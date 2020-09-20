@@ -35,6 +35,7 @@ class FormM extends Component{
         this.setState({
             contenu: ""
         })
+        this.props.reload()
     }
 
     render(){

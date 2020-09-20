@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import ReplyForm from './ReplyForm'
 import axios from 'axios'
 import moment from 'moment'
+import ReplyCtn from './ReplyCtn';
 
 export class ReplyPage extends Component {
     constructor(props){
@@ -13,6 +14,11 @@ export class ReplyPage extends Component {
             rep: [],
             date: new Date(),
         }
+    }
+
+    timeOut= () => {
+        this.props.logout();
+        alert("[Time out] Deconnecte !")
     }
 
     updateState = (idM2) => {
@@ -40,11 +46,27 @@ export class ReplyPage extends Component {
         .catch(errorRep => {alert(errorRep)})
     }
 
+    delete = async (idM) => {
+        await axios.delete("http://localhost:8080/Projet/messages?idMessage=" + this.props.idM + "&id=" + this.props.id+"&idRep="+ idM)
+        .then(r => 
+            {r.data.code !== undefined ? 
+                (r.data.code === "458"? 
+                    this.timeOut()
+                    :alert(r.data.code+": "+r.data.mess))
+                :alert("Message supprime")})
+        .catch(errorRep => {alert(errorRep)})
+        this.repondre()
+    }
+
     componentWillMount = () => {
         this.repondre()
     }
 
     render() {
+        var ar = []
+        for (var index = 0; this.state.rep[index]; index++){
+            ar.push(<ReplyCtn rep={this.state.rep[index]} logout={this.props.logout} rf={this.updateState} profS={this.props.profS} id={this.props.id} del={this.delete}/>)
+        }
         return (
             <div className="rep">
                 <div className="rep-msg">
@@ -57,7 +79,8 @@ export class ReplyPage extends Component {
                         <div className="rep-date">{moment(this.state.date).format('YYYY-MM-DD H:mm:ss a')}</div>
                     </div>
                 </div>
-                <ReplyForm logout={this.setLogout} id={this.props.id} idM={this.state.idM} rep={this.state.rep} rf={this.updateState} profS={this.props.profS}/>
+                <ReplyForm reload={this.repondre} logout={this.props.logout} id={this.props.id} idM={this.state.idM}/>
+                {ar}
             </div>
         )
     }

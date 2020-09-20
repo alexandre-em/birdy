@@ -1,6 +1,7 @@
 import React, {Component} from "react"
 import Message from './Message'
 import axios from 'axios'
+import FormM from "./FormM";
 
 class ListM extends Component{
     constructor(props){
@@ -46,11 +47,13 @@ class ListM extends Component{
     }
 
     render(){
+        
         var ncl= [];
         for (var index = 0; this.state.lmsg[index]; index++){
             ncl.push(<Message key={this.state.lmsg[index]._id.$oid} acc={this.props.acc} nc={this.state.lmsg[index]} prof={this.props.prof} rep={this.props.rep} logout={this.props.logout} del={this.delete} like={this.props.like}/>)
         }
         return <div>
+            {this.props.canSend? <FormM reload={this.getLMsg} logout={this.props.logout} username={this.props.acc}/>: ""}
             {ncl}
         </div>
     }

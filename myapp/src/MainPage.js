@@ -4,7 +4,6 @@ import NavigationPanel from './NavigationPanel'
 import Signin from './Signin'
 import FormLog from './FormLog'
 import ListeM from './ListeM'
-import FormM from './FormM'
 import Profil from './Profil'
 import Utilisateur from './Utilisateur';
 import ReplyPage from './ReplyPage';
@@ -106,8 +105,8 @@ class MainPage extends Component {
                             </div>
                             <div className="rep-date">{moment(new Date()).format('YYYY-MM-DD H:mm')}</div>
                         </div>
-                        {this.state.connecte === true ? <FormM logout={this.setLogout} username={this.state.username}/>: <h2 className="rep-ctn">Veuillez vous connecter ou vous inscrire pour voir les messages</h2> }
-                        {this.state.connecte === true ? <ListeM acc={this.state.username} prof={this.profilUser} rep={this.replyM} logout={this.setLogout} like={this.state.username}/>: "" }
+                        {this.state.connecte === true ? "" : <h2 className="rep-ctn">Veuillez vous connecter ou vous inscrire pour voir les messages</h2> }
+                        {this.state.connecte === true ? <ListeM canSend={true} acc={this.state.username} prof={this.profilUser} rep={this.replyM} logout={this.setLogout} like={this.state.username}/>: "" }
                     </div>
                  </div>;
         }
