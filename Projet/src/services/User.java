@@ -46,7 +46,7 @@ public class User {
 	/*
 	 * creer un nouvel utilisateur avec son id:`pseudo`, `pass`, `nom`, `prenom`, `email`, `DateN`
 	 */
-	public static JSONObject createUser(String pseudo, String pass, String nom, String prenom, String email, String dateN) {
+	public static JSONObject createUser(String pseudo, String pass, String nom, String prenom, String email, String dateN, String imgUrl) {
 		JSONObject j = new JSONObject();
 		if((pseudo.isEmpty())||(pass.isEmpty())) 
 			return tools.ErrorJSON.serviceRefused("champ_vide", "00");
@@ -59,12 +59,13 @@ public class User {
 				return tools.ErrorJSON.serviceRefused("nom_deja_pris", "01");
 		} catch (SQLException e) {
 			try {
-				tools.User.insertNewUser(pseudo, pass, nom, prenom, email, dateN);
+				tools.User.insertNewUser(pseudo, pass, nom, prenom, email, dateN, imgUrl);
 				j.put(tools.User.username, pseudo);
 				j.put(tools.User.surname, nom);
 				j.put(tools.User.name, prenom);
 				j.put(tools.User.mail, email);
 				j.put(tools.User.dateNaiss, dateN);
+				j.put(tools.User.imgUrl, imgUrl);
 				return j;
 			} catch (SQLException e1) {
 				return tools.ErrorJSON.serviceRefused(e1.getMessage(), "10");

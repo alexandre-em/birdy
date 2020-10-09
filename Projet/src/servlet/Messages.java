@@ -27,8 +27,9 @@ public class Messages extends HttpServlet  {
 		String id = req.getParameter("id");
 		String idmsg = req.getParameter("idmsg");
 		String input = req.getParameter("Message");
+		String imgUrl = req.getParameter("imgUrl");
 		
-		JSONObject j = services.Messages.sendMessage(id, idmsg, input);
+		JSONObject j = services.Messages.sendMessage(id, idmsg, input, imgUrl);
 		writer.println(j);
 	}
 	

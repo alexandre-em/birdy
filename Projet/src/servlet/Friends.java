@@ -14,7 +14,8 @@ public class Friends extends HttpServlet  {
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		PrintWriter writer = res.getWriter();
 		String id = req.getParameter("id");
-		JSONObject j = services.Friends.getFriendList(id);
+		String followed = req.getParameter("followed");
+		JSONObject j = services.Friends.getFriendList(id, followed);
 		writer.println(j);
 	}
 	

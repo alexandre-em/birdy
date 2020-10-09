@@ -8,7 +8,7 @@ import org.json.JSONObject;
 public class UserTest {
 	
 	public static void createUser( String username, String pass, String nom, String prenom, String email, String dateN) {
-		 JSONObject j = services.User.createUser(username, pass, nom, prenom, email, dateN);
+		 JSONObject j = services.User.createUser(username, pass, nom, prenom, email, dateN, "");
 			System.out.println("[Creation]: "+j);
 	}
 	

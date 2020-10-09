@@ -15,7 +15,7 @@ public class FriendsTest {
 	}
 	
 	public static void listFriend(String user) {
-		JSONObject j = services.Friends.getFriendList(user);
+		JSONObject j = services.Friends.getFriendList(user, "");
 		System.out.println("[List ami] "+user+j);
 	}
 	

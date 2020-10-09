@@ -1,0 +1,136 @@
+.left {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-top: 25px;
+    justify-self: flex-end;
+}
+.leftSideBar > a {
+    text-decoration: none;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+}
+
+.title > span {
+    font-weight: bolder;
+    font-size: 14pt;
+}
+
+.title > img {
+    cursor: pointer;
+    transition: 350ms;
+    padding: 0 2px 15px 2px;
+    border-radius: 25px;
+}
+.title > img:focus,
+.title > img:hover{
+    background-color: rgba(57, 136, 182, 0.1);
+}
+.left__menu-item{
+    display: flex;
+    place-items: center;
+    padding:10px;
+    transition: 350ms;
+    border-radius: 50px;
+    color: rgb(34, 40, 44);
+    cursor: pointer;
+}
+.left__menu-item.git{
+    color: rgb(143, 71, 143);
+}
+.left__menu-item.active{
+    color: rgb(75, 176, 235);
+}
+.left__menu-item:focus,
+.left__menu-item:hover{
+    background-color: rgba(63, 146, 194, 0.15);
+    color: rgb(74, 167, 221);
+}
+.left__menu-item.git:focus,
+.left__menu-item.git:hover{
+    background-color: rgba(120, 63, 194, 0.15);
+    color: rgb(177, 67, 177);
+}
+.left__menu-item > .left__menu-name {
+    padding-left: 10px;
+}
+
+.tweet__btn {
+    padding-top: 35px;
+}
+.tweet__btn.logout > span {
+    background-color: rgba(86, 103, 112, 0.726);
+}
+.tweet__btn > span {
+    background-color: rgb(75, 176, 235);
+    color:#eeeeee;
+    padding: 10px 55px 10px 45px;
+    border-radius: 50px;
+    cursor: pointer;
+    display: flex;
+    place-items: center;
+    font-size: .9rem;
+    transition: 350ms;
+    cursor: pointer;
+}
+.tweet__btn > span:hover,
+.tweet__btn > span:focus{
+    background-color: rgb(51, 126, 170);
+}
+.tweet__btn > span > .MuiSvgIcon-root {
+    padding-right: 7px;
+}
+
+.btn__mob {
+    display: none;
+    padding-top: 35px;
+    padding-left: 11px;
+}
+.btn__mob > .MuiSvgIcon-root {
+    background-color: rgb(75, 176, 235);
+    cursor: pointer;
+    color:#eeeeee;
+    padding: 8px;
+    border-radius: 25px;
+    transition: 350ms;
+}
+.btn__mob.logout > .MuiSvgIcon-root {
+    margin-top: 35px;
+    background-color: rgba(86, 103, 112, 0.726);
+}
+
+.btn__mob > .MuiSvgIcon-root:hover,
+.btn__mob > .MuiSvgIcon-root:focus{
+    background-color: rgb(51, 126, 170);
+}
+
+@media(max-width: 1276px){
+    .left{
+        justify-self:start;
+        width: fit-content;
+    }
+    .title > span {
+        display: none;
+    }
+    .left__menu-item > .left__menu-name {
+        display: none;
+    }
+    .tweet__btn{
+        display: none;
+    }
+    .btn__mob{
+        display: inline;
+    }
+}
+@media(max-width: 500px){
+    .title > img {
+        display: none;
+    }
+    .left {
+        padding: 0px;
+        padding-top: 15px;
+    }
+}

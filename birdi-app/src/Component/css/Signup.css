@@ -1,0 +1,87 @@
+.signup {
+    display: grid;
+    place-items: center;
+    padding-top: 35px;
+}
+
+.signup__header {
+    display: grid;
+    place-items: center;
+    padding-bottom: 25px;
+}
+
+.signup__body {
+    display: grid;
+    height: 25px;
+    padding-left: 15px;
+    grid-template-columns: repeat(2, auto);
+}
+.signup__body-info{
+    display: grid;
+    grid-template-columns: repeat(2,auto);
+}
+
+.signup__elt{
+    display: flex;
+    padding-bottom: 3vh;
+    align-items: flex-end;
+    padding-right: 20px;
+}
+
+.signup__elt.out > .MuiFormControl-root{
+    width: 100%;
+}
+.signup__elt > .MuiSvgIcon-root{
+    padding-right: 10px;
+    color: rgb(66, 79, 87);
+}
+
+.signup__body-img{
+    display: grid;
+    place-items: center;
+}
+
+.signup__body-img > .MuiAvatar-root{
+    width: 150px;
+    height: 150px;
+}
+
+.signup__body-img-dtl > form > label > span > span > .MuiSvgIcon-root{
+    font-size: 35pt;
+    color: rgb(66, 79, 87);
+}
+.signup__body-img-dtl > form > label > span > b {
+    margin-left: -15px;
+    text-overflow: ellipsis;
+    padding-right: 15px;
+}
+.btn-submit {
+    padding-top: 5vh;
+}
+
+.btn-submit > b{
+    background-color: rgb(112, 167, 199);
+    color: #ebebeb;
+    padding: 10px 50px 10px 50px;
+    transition: 350ms;
+    cursor: pointer;
+}
+.btn-submit > b:focus,
+.btn-submit > b:hover{
+    background-color: rgb(51, 126, 170);
+}
+.btn-submit.disable> b{
+    background-color: rgb(51, 126, 170);
+    color: #c7c7c7;
+    padding: 10px 50px 10px 50px;
+    cursor: default;
+}
+.btn-submit.cancel > b{
+    background-color: rgb(134, 71, 71);
+    color: #ebebeb;
+    padding: 10px 50px 10px 50px;
+}
+.btn-submit.cancel > b:focus,
+.btn-submit.cancel > b:hover{
+    background-color: rgb(92, 27, 27);
+}

@@ -12,7 +12,7 @@ public class MessagesTest {
 	services.Authentification.login("anijya", "anikofu");
 	//JSONObject j = services.Messages.getMessage("5e5571bfbcde4139f9edc248");
 	//System.out.println(j);
-	JSONObject j= services.Messages.createMessage("anijya", "blabla");
+	JSONObject j= services.Messages.createMessage("anijya", "blabla", "testUrl");
 	//JSONObject re = services.Messages.removeMessage("anijya", "5e57f54a71630a1fccc96fb1");
 	try {
 		System.out.println(j);
@@ -20,9 +20,9 @@ public class MessagesTest {
 		System.out.println(j2);
 		j2 = (JSONObject) j2.get(tools.Messages.msgid);
 		System.out.println(
-		services.Messages.replyMessage("anijya", j2.get("$oid").toString(), "ok"));
+		services.Messages.replyMessage("anijya", j2.get("$oid").toString(), "ok",""));
 		System.out.println(
-		services.Messages.replyMessage("anijya", j2.get("$oid").toString(), "ko"));
+		services.Messages.replyMessage("anijya", j2.get("$oid").toString(), "ko",""));
 		j=services.Messages.getMessage(j2.get("$oid").toString());
 		System.out.println(j2.get("$oid").toString());
 		System.out.println(j);

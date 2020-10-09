@@ -31,6 +31,7 @@ public class Messages {
 	public final static String datePub= "date";
 	public final static String like= "like";
 	public final static String comment= "comment";
+	public final static String img = "imgUrl";
 	
 	//		TABLES
 	public final static String messaget = "message"; 
@@ -107,24 +108,29 @@ public class Messages {
 	 * @return le JSON du message cree
 	 * @throws SQLException
 	 */
-	public static String createMessage(String id, String input) throws SQLException {
+	public static String createMessage(String id, String input, String imgUrl, String origin) throws SQLException {
 		GregorianCalendar  calendar =new java.util.GregorianCalendar () ;
 		MongoDatabase db = Database.getMongoDBConnection();
 		MongoCollection<Document> coll = db.getCollection(messaget);
 		String nom = tools.User.getNom(id);
+		String avatar = tools.User.getAvatar(id);
 		Document doc = new Document();
 		doc.append(username, id);
+		doc.append("avatar", avatar);
 		doc.append(name, nom);
 		doc.append(msgtext, input);
 		Date date_du_jour = calendar.getTime();
 		doc.append(datePub, date_du_jour);
 		doc.append(like, new ArrayList<String>());
 		doc.append(comment, new ArrayList<String>());
+		doc.append(img, imgUrl);
+		doc.append("origin", origin);
 		coll.insertOne(doc);
+
 		return doc.toJson();
 	}
 	
-	public static String replyMessage(String id, String idmsg, String content) throws JSONException, SQLException {
+	public static String replyMessage(String id, String idmsg, String content, String imgUrl) throws JSONException, SQLException {
 		String s = rechercheMessageId(idmsg);
 		JSONObject j = new JSONObject(s);
 		JSONArray lj = j.getJSONArray(comment);
@@ -132,13 +138,14 @@ public class Messages {
 		for (int i=0 ; i<lj.length(); i++) {
 			l.add((String) lj.get(i));
 		}
-		l.add(createMessage(id, content));
+		l.add(createMessage(id, content, imgUrl, idmsg));
 		MongoDatabase db = Database.getMongoDBConnection();
 		MongoCollection<Document> coll = db.getCollection(messaget);
 		Document dm = new Document().append(msgid, new ObjectId(idmsg));
 		Document rep = coll.find(dm).first();
 		rep.append(comment, l);
 		coll.replaceOne(coll.find(dm).first(), rep);
+		
 		return rep.toJson();
 	}
 	
@@ -157,6 +164,7 @@ public class Messages {
 		Document rep = coll.find(dm).first();
 		rep.append(comment, l);
 		coll.replaceOne(coll.find(dm).first(), rep);
+		deleteMessage(idRep);
 		return rep.toJson();
 	}
 	
@@ -248,6 +256,7 @@ public class Messages {
 		Document doc = new Document();
 		doc.append(msgid, new ObjectId(msg));
 		coll.deleteOne(doc);
+		
 	}
 	
 	public static void deleteMessageUser(String id) {

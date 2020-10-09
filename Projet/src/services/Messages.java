@@ -11,8 +11,8 @@ public class Messages {
 	
 
 	public static JSONObject choixGetMessage(String id, String requete, String filtre, String mur) {
-		if (id.isBlank()) {
-			if(!mur.isBlank())
+		if (id=="") {
+			if(mur!="")
 				return getMur(mur);
 			else
 				return listMessage(requete, filtre);
@@ -22,7 +22,7 @@ public class Messages {
 //---------------------------------------------------------------------------------------------------------------------------------------------	
 
 	public static JSONObject deleteMessageRep(String id, String idMsg, String idRep) {
-		if (idRep.isBlank()) {
+		if (idRep=="") {
 			return removeMessage(id, idMsg);
 		} else
 			return deleteReply(id, idMsg, idRep);
@@ -76,17 +76,17 @@ public class Messages {
 	
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
-	public static JSONObject sendMessage(String id, String idmsg, String content) {
+	public static JSONObject sendMessage(String id, String idmsg, String content, String urlImg) {
 		try {
 			if(!tools.Authentification.isConnecte(id))
 				return tools.ErrorJSON.serviceRefused("user non connecte", "504");
 			
 			if(idmsg.isEmpty()) {
-				return createMessage(id, content);
+				return createMessage(id, content, urlImg);
 			}
 			if (tools.Authentification.verifLimit(id)) {
 				tools.Authentification.envoieAction(id);
-				return replyMessage(id,idmsg,content);
+				return replyMessage(id,idmsg,content, urlImg);
 			}else
 				tools.Authentification.logout(idmsg);
 				return tools.ErrorJSON.serviceRefused("time out", "458");
@@ -105,14 +105,14 @@ public class Messages {
 	 * @param input
 	 * @return le JSON du message
 	 */
-	public static JSONObject createMessage(String id, String input) {
+	public static JSONObject createMessage(String id, String input, String urlImg) {
 		try {
 			if((!tools.Authentification.isConnecte(id))) {
 				return tools.ErrorJSON.serviceRefused("Non Connecte", "07");
 			}
 			if (tools.Authentification.verifLimit(id)) {
 				tools.Authentification.envoieAction(id);
-				String s = tools.Messages.createMessage(id, input);
+				String s = tools.Messages.createMessage(id, input, urlImg, "");
 				return new JSONObject(s);
 			}else
 				tools.Authentification.logout(id);
@@ -129,14 +129,14 @@ public class Messages {
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
 
-	public static JSONObject replyMessage(String id, String idmsg, String content) {
+	public static JSONObject replyMessage(String id, String idmsg, String content, String imgUrl) {
 		try {
 			if((!tools.Authentification.isConnecte(id))) {
 				return tools.ErrorJSON.serviceRefused("Non Connecte", "07");
 			}
 			if (tools.Authentification.verifLimit(id)) {
 				tools.Authentification.envoieAction(id);
-				return new JSONObject(tools.Messages.replyMessage(id, idmsg, content));
+				return new JSONObject(tools.Messages.replyMessage(id, idmsg, content, imgUrl));
 			}else
 				return tools.ErrorJSON.serviceRefused("time out", "458");
 		} catch (SQLException e) {
@@ -181,11 +181,16 @@ public class Messages {
 	public static JSONObject removeMessage(String id, String msg) {
 		try {
 			if(!tools.Authentification.isConnecte(id))
-				return tools.ErrorJSON.serviceRefused("user non connecte", "07");
+				return tools.ErrorJSON.serviceRefused(id+" non connecte", "07");
 			if (tools.Authentification.verifLimit(id)) {
 				tools.Authentification.envoieAction(id);
 				tools.Messages.checkIdMsg(msg, id);
-				tools.Messages.deleteMessage(msg);
+				String s = tools.Messages.rechercheMessageId(msg);
+				JSONObject j = new JSONObject(s);
+				String idrep=(String) j.get("origin");
+				System.out.println(idrep.isEmpty());
+				if (!idrep.isEmpty()) tools.Messages.deleteReply(idrep, msg);
+				else tools.Messages.deleteMessage(msg);
 				return tools.ErrorJSON.serviceAccepted("remove_message", msg);
 			}else {
 				tools.Authentification.logout(id);

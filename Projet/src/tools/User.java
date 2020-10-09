@@ -19,6 +19,7 @@ public class User {
 	public final static String name = "prenom";
 	public final static String mail = "email";
 	public final static String dateNaiss= "dateN";
+	public final static String imgUrl= "imgUrl";
 	
 	//		TABLES
 	private final static String utilisateurs = "utilisateurs";
@@ -67,7 +68,7 @@ public class User {
 	public static JSONObject getUser(String id) throws SQLException, JSONException {
 		Connection c = bd.Database.getMySQLConnection();
 		Statement st= c.createStatement();
-		String rq = "Select "+ username+" , "+ surname +" , "+ name +" , "+ mail +" , "+ dateNaiss+" from "+ utilisateurs +" where "+ username +" = '"+id+"';"; 
+		String rq = "Select "+ username+" , "+ surname +" , "+ name +" , "+ mail +" , "+ dateNaiss+" , "+ imgUrl+" from "+ utilisateurs +" where "+ username +" = '"+id+"';"; 
 		ResultSet rs= st.executeQuery(rq);
 		JSONObject jusr=new JSONObject();
 		while (rs.next()) { 
@@ -77,6 +78,7 @@ public class User {
 				jusr.put(surname, rs.getString(surname));
 				jusr.put(mail, rs.getString(mail));
 				jusr.put(dateNaiss, rs.getString(dateNaiss));
+				jusr.put(imgUrl, rs.getString(imgUrl));
 			}
 		}
 		st.close();
@@ -116,11 +118,11 @@ public class User {
 	 * @throws SQLException
 	 * @throws JSONException
 	 */
-	public static void insertNewUser(String pseudo, String pass, String nom, String prenom,String email,String dateN) throws SQLException, JSONException {
+	public static void insertNewUser(String pseudo, String pass, String nom, String prenom,String email,String dateN, String img) throws SQLException, JSONException {
 		Connection c = bd.Database.getMySQLConnection();
 		Statement st= c.createStatement();
-		String rq = "INSERT INTO utilisateurs ("+username+","+ password+","+ surname +","+ name+","+ mail +","+ dateNaiss;
-		rq=rq+") values ('" + pseudo + "', AES_ENCRYPT('"+pass+"', '"+bd.DBStatic.code+"'), '"+ nom +"' ,'"+prenom+"','"+ email +"','"+dateN+"');";
+		String rq = "INSERT INTO utilisateurs ("+username+","+ password+","+ surname +","+ name+","+ mail +","+ dateNaiss+","+ imgUrl;
+		rq=rq+") values ('" + pseudo + "', AES_ENCRYPT('"+pass+"', '"+bd.DBStatic.code+"'), '"+ nom +"' ,'"+prenom+"','"+ email +"','"+dateN+"','"+img+"');";
 		int rs= st.executeUpdate(rq);
 		if(rs==0)
 			throw new JSONException("ERROR : Aucune insertion");
@@ -197,8 +199,26 @@ public class User {
 		ResultSet rs= st.executeQuery(rq);
 		while(rs.next()) {
 			String s = rs.getString("prenom");
-			if(s.equals(id))
-				return s;
+			return s;
+		}
+		st.close();
+		c.close();
+		return null;		//On ne doit pas arriver dans ce cas
+	}
+	
+	/**
+	 * Renvoie le avatar`id`
+	 * @param id
+	 * @throws SQLException
+	 */
+	public static String getAvatar(String id) throws SQLException {
+		Connection c = bd.Database.getMySQLConnection();
+		Statement st= c.createStatement();
+		String rq = "Select imgUrl FROM utilisateurs WHERE username = '"+id+"';"; 
+		ResultSet rs= st.executeQuery(rq);
+		while(rs.next()) {
+			String s = rs.getString(imgUrl);
+			return s;
 		}
 		st.close();
 		c.close();

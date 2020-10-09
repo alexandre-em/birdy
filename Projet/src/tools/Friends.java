@@ -86,6 +86,20 @@ public class Friends {
 		return lami;
 	}
 	
+	public static List<String> getFollowedList(String usr) throws SQLException {
+		List<String> lami=new ArrayList<>();
+		Connection c = bd.Database.getMySQLConnection();
+		Statement st = c.createStatement();
+		String query = "SELECT "+ id1 +" FROM "+friends+" where "+id2+"='"+usr+"';";
+		ResultSet rs = st.executeQuery(query);
+		while(rs.next()) {
+			lami.add(rs.getString("id1"));
+		}
+		st.close();
+		c.close();
+		return lami;
+	}
+	
 	/**
 	 * Supprime de la liste d'ami de id , user : usr
 	 * @param id

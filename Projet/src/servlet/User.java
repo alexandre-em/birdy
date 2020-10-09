@@ -26,7 +26,8 @@ public class User extends HttpServlet  {
 		String prenom = req.getParameter("prenom");
 		String email = req.getParameter("mail");
 		String dateN = req.getParameter("dateNaissance");
-		JSONObject cre_usr=services.User.createUser(id, pwd, nom, prenom, email, dateN);
+		String imgUrl = req.getParameter("imgUrl");
+		JSONObject cre_usr=services.User.createUser(id, pwd, nom, prenom, email, dateN, imgUrl);
 		writer.println(cre_usr);
 	}
 	

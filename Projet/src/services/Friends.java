@@ -11,15 +11,23 @@ public class Friends {
 	 * @param id
 	 * @return Le JSON de la liste d'ami
 	 */
-	public static JSONObject getFriendList(String id) {
+	public static JSONObject getFriendList(String id, String followed) {
 		try {
-			if(!tools.User.existUser(id))
-				return tools.ErrorJSON.serviceRefused("user n'existe pas", "55");
-			List<String> lami = tools.Friends.getFriendList(id);
-			if (lami.isEmpty())
-				return tools.ErrorJSON.serviceRefused(id+" n'a pas d'amis", "456");
+			if(id.isEmpty()) {
+				if(!tools.User.existUser(followed))
+					return tools.ErrorJSON.serviceRefused("user n'existe pas", "55");
+				return tools.ErrorJSON.serviceAccepted("followed", tools.Friends.getFollowedList(followed).toString());
+			}
 
-			return tools.ErrorJSON.serviceAccepted("friends"+id, lami.toString());
+			else {
+				if(!tools.User.existUser(id))
+					return tools.ErrorJSON.serviceRefused("user n'existe pas", "55");
+				List<String> lami = tools.Friends.getFriendList(id);
+				if (lami.isEmpty())
+					return tools.ErrorJSON.serviceRefused(id+" n'a pas d'amis", "456");
+	
+				return tools.ErrorJSON.serviceAccepted("friends"+id, lami.toString());
+			}
 				
 		} catch (SQLException e) {
 			return tools.ErrorJSON.serviceRefused(e.getMessage(), e.getErrorCode()+"");

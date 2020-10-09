@@ -1,0 +1,140 @@
+.mainPage{
+    border: 1px solid #b4b4b4;
+    min-width: 600px;
+}
+
+.rep {
+    border-bottom: 1px solid #d0d5d6;
+}
+
+.main__header {
+    padding: 15px;
+    display:flex;
+    align-content: center;
+}
+.main__header > .MuiSvgIcon-root{
+    cursor: pointer;
+    border-radius: 5px;
+    transition: 350ms;
+}
+.main__header > .MuiSvgIcon-root:hover,
+.main__header > .MuiSvgIcon-root:focus
+{
+    background-color: #d4d4d4;
+}
+.main__header > h3 {
+    padding-left: 15px;
+}
+
+.main__form {
+    display: grid;
+    grid-template-columns: max-content auto;
+    padding: 10px 5px 5px 10px;
+    border: 1px solid #b4b4b4;
+    border-bottom: 13px solid #d0d5d6;
+    border-left: none;
+    border-right: none;
+    overflow: hidden;
+    overflow-wrap: break-word;
+}
+.main__form-inp{
+    padding-left: 15px;
+}
+.main__form-inp > form > input {
+    padding:10px;
+    overflow: hidden;
+    overflow-wrap: break-word;
+    background-color: #eeeeee;
+    font-size: 12pt;
+    color: rgb(66, 79, 87);
+    
+    border:none;
+    min-width: 90%;
+    outline-width: 0;
+    outline-style: none;
+}
+
+.comment-btn{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 5px;
+}
+
+.comment-pic > label > .MuiIconButton-root {
+    color: rgb(75, 176, 235);
+}
+
+.comment-submit {
+    padding: 10px 20px 10px 20px;
+    background-color: rgb(75, 176, 235);
+    color:#eeeeee;
+
+    border-radius: 25px;
+    transition: 350ms;
+    cursor: pointer;
+}
+.comment-submit.empty {
+    background-color: rgba(112, 167, 199, 0.897);
+    color:#dddddde1;
+    cursor: default;
+    transition: 350ms;
+}
+.comment-submit.active:focus,
+.comment-submit.active:hover{
+    background-color: rgb(51, 126, 170);
+}
+
+.message{
+    padding: 10px;
+    display: grid;
+    grid-template-columns: max-content 85%;
+    border-bottom: 1px solid #b4b4b4;
+
+    overflow: hidden;
+}
+.message > .MuiAvatar-root{
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.message-body{
+    display: flex;
+    flex-direction: column;
+}
+.message-detail{
+    cursor: pointer;
+}
+
+.message-container{
+    padding-top: 5px;
+}
+.message-container > img {
+    padding-top: 10px;
+    width: 50vw;
+    max-width: 400px;
+    border-radius: 35px;
+}
+
+.message-button{
+    display: flex;
+    justify-content: space-between;
+}
+
+.message-button > span {
+    display: flex;
+    font-size: 11.5pt;
+    align-items: center;
+}
+
+@media(max-width: 722px){
+    .mainPage{
+        min-width: 80vw;
+    }
+}
+
+@media(max-width: 500px){
+    .mainPage{
+        min-width: 95vw;
+    }
+}
