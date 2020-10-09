@@ -29,8 +29,8 @@ class FormM extends Component{
         formData.append('id', this.props.username);
         formData.append('Message', this.state.contenu);
         formData.append('idmsg', '');
-        await axios.post("http://localhost:8080/Projet/messages", formData)
-        .then(r => {r.data.code !== undefined ? (r.data.code === "458"? this.timeOut():alert(r.data.code + ": " +r.data.mess)):alert("Message envoye !")})
+        await axios.post("https://birdy-em.herokuapp.com/messages", formData)
+        .then(r => {r.data.code !== undefined ? ((r.data.code === "458" || r.data.code === "504")? this.timeOut():alert(r.data.code + ": " +r.data.mess)):alert("Message envoye !")})
         .catch(errorRep => {alert(errorRep)})
         this.setState({
             contenu: ""

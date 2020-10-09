@@ -38,18 +38,14 @@ class FormLog extends Component{
         const formData = new URLSearchParams();
         formData.append('login', this.state.username);
         formData.append('password', this.state.password);
-        await axios.post("http://localhost:8080/Projet/login", formData)
-        .then(r => {r.data.code === undefined ? this.traitementReponse(r):alert(r.data.code + ': ' + r.data.mess)})
+        await axios.post("https://birdy-em.herokuapp.com/login", formData)
+        .then(r => {r.data.code === undefined ? this.traitementReponse(r):(r.data.code === "01"?this.traitementReponse(r):alert(r.data.code + ': ' + r.data.mess))})
         .catch(errorRep => {alert(errorRep)})
     }
 
     traitementReponse = (props) => {
-        if(props.data.key !== undefined){
-            this.props.acc(this.state.username);
-            this.props.log();
-        } else {
-            alert(props.data.mess)
-        }
+        this.props.acc(this.state.username);
+        this.props.log();
     }
 
     render(){

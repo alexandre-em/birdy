@@ -2,6 +2,8 @@
 
 Site Web de type social inspire de Twitter en monopage. (à améliorer)
 
+[Live demo](https://birdy-em.netlify.app/)
+
 ## Technologies utilisées :
 - Coté serveur : Java, MySql, MongoDB, Tomcat
 - Coté client : HTML, CSS, React
@@ -14,3 +16,6 @@ Site Web de type social inspire de Twitter en monopage. (à améliorer)
 
 ## Demo
 ![](birdy.gif)
+
+## Nouvelle version cote client (09/10/2020)
+La nouvelle version se trouve dans le dossier `birdy-app` et l'ancienne dans `myapp`

@@ -29,7 +29,7 @@ export class ReplyPage extends Component {
     }
 
     repondre = () => {
-        axios.get("http://localhost:8080/Projet/messages", {params:{
+        axios.get("https://birdy-em.herokuapp.com/messages", {params:{
             id: this.state.idM,
             request: '',
             filtre: '',
@@ -47,10 +47,10 @@ export class ReplyPage extends Component {
     }
 
     delete = async (idM) => {
-        await axios.delete("http://localhost:8080/Projet/messages?idMessage=" + this.props.idM + "&id=" + this.props.id+"&idRep="+ idM)
+        await axios.delete("https://birdy-em.herokuapp.com/messages?idMessage=" + this.props.idM + "&id=" + this.props.id+"&idRep="+ idM)
         .then(r => 
             {r.data.code !== undefined ? 
-                (r.data.code === "458"? 
+                ((r.data.code === "458" || r.data.code === "504")? 
                     this.timeOut()
                     :alert(r.data.code+": "+r.data.mess))
                 :alert("Message supprime")})

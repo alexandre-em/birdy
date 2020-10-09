@@ -8,8 +8,8 @@ class RmF extends Component {
     }
 
     handleClick= (event) => {
-        axios.delete("http://localhost:8080/Projet/friends?id="+this.props.id+"&ami="+this.props.acc)
-        .then(r => {r.data.code === undefined ? alert("Unfollowed") : (r.data.code === "458"? this.timeOut() : alert(r.data.code + ': ' + r.data.mess))})
+        axios.delete("https://birdy-em.herokuapp.com/friends?id="+this.props.id+"&ami="+this.props.acc)
+        .then(r => {r.data.code === undefined ? alert("Unfollowed") : ((r.data.code === "458" || r.data.code === "504")? this.timeOut() : alert(r.data.code + ': ' + r.data.mess))})
         .catch(errorRep => {alert(errorRep)})
     }
 

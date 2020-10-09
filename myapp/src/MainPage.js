@@ -105,7 +105,7 @@ class MainPage extends Component {
                             </div>
                             <div className="rep-date">{moment(new Date()).format('YYYY-MM-DD H:mm')}</div>
                         </div>
-                        {this.state.connecte === true ? "" : <h2 className="rep-ctn">Veuillez vous connecter ou vous inscrire pour voir les messages</h2> }
+                        {this.state.connecte === true ? "" : <h2 className="rep-ctn">Veuillez vous connecter ou vous inscrire pour voir les messages. Demo user/password : "demo"</h2> }
                         {this.state.connecte === true ? <ListeM canSend={true} acc={this.state.username} prof={this.profilUser} rep={this.replyM} logout={this.setLogout} like={this.state.username}/>: "" }
                     </div>
                  </div>;

@@ -26,7 +26,7 @@ class Profil extends Component{
     }
 
     componentWillMount = () => {
-        axios.get("http://localhost:8080/Projet/user", {params:{
+        axios.get("https://birdy-em.herokuapp.com/user", {params:{
             username: this.props.acc,
         }, data:{}})
         .then(response => {

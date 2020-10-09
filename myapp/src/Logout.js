@@ -11,8 +11,8 @@ class Logout extends Component{
     }
 
     deconnexion = () => {
-        axios.delete("http://localhost:8080/Projet/login?login="+this.props.acc)
-        .then(r => {r.data.code === undefined ? this.disconnect() : alert(r.data.code + ': ' + r.data.mess)})
+        axios.delete("https://birdy-em.herokuapp.com/login?login="+this.props.acc)
+        .then(r => this.disconnect())
         .catch(errorRep => {alert(errorRep)})
     }
     

@@ -52,7 +52,7 @@ handleSubmit(event){
     formData.append('prenom', this.state.prenom);
     formData.append('mail', this.state.email);
     formData.append('dateNaissance', this.state.dateN);
-    axios.post("http://localhost:8080/Projet/user", formData)
+    axios.post("https://birdy-em.herokuapp.com/user", formData)
     .then(r => {r.data.code === undefined ? this.creation() :alert(r.data.code + ': ' + r.data.mess)})
     .catch(errorRep => {alert(errorRep)})
 }

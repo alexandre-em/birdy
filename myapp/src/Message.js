@@ -33,7 +33,7 @@ class Message extends Component{
     }
 
     infos = () => {
-        axios.get("http://localhost:8080/Projet/messages", {params:{
+        axios.get("https://birdy-em.herokuapp.com/messages", {params:{
             mur: '',
             request: '',
             filtre: '',
@@ -49,10 +49,10 @@ class Message extends Component{
     }
 
     like = async () => {
-        await axios.put("http://localhost:8080/Projet/messages?idmsg=" + this.props.nc._id.$oid + "&id=" + this.props.like)
+        await axios.put("https://birdy-em.herokuapp.com/messages?idmsg=" + this.props.nc._id.$oid + "&id=" + this.props.like)
         .then(r => 
             {r.data.code !== undefined ? 
-                (r.data.code === "458"? 
+                ((r.data.code === "458" || r.data.code === "504")? 
                     this.timeOut()
                     :alert(r.data.code+": "+r.data.mess))
                 :this.infos()})

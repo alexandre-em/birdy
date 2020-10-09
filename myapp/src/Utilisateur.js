@@ -61,7 +61,7 @@ class Utilisateur extends Component{
     }}
 
     isFriend = () => {
-        axios.get("http://localhost:8080/Projet/friends", {params:{
+        axios.get("https://birdy-em.herokuapp.com/friends", {params:{
             id: this.props.id,
         }, data:{}})
         .then(response => {
@@ -87,7 +87,7 @@ class Utilisateur extends Component{
     }
 
     infoUser = () => {
-        axios.get("http://localhost:8080/Projet/user", {params:{
+        axios.get("https://birdy-em.herokuapp.com/user", {params:{
             username: this.state.username,
         }, data:{}})
         .then(response => {

@@ -12,8 +12,8 @@ class AddF extends Component {
         const formData = new URLSearchParams();
         formData.append('id', this.props.id);
         formData.append('ami', this.props.acc);
-        axios.post("http://localhost:8080/Projet/friends", formData)
-        .then(r => {r.data.code === undefined ? alert("Followed!") : (r.data.code === "458"? this.timeOut() : alert(r.data.code + ': ' + r.data.mess))})
+        axios.post("https://birdy-em.herokuapp.com/friends", formData)
+        .then(r => {r.data.code === undefined ? alert("Followed!") : ((r.data.code === "458" || r.data.code === "504")? this.timeOut() : alert(r.data.code + ': ' + r.data.mess))})
         .catch(errorRep => {alert(errorRep)})
     }
 

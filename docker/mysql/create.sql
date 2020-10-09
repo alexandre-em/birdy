@@ -1,6 +1,4 @@
-CREATE DATABASE test;
-
-USE test;
+USE heroku_b320ed1a75c15c2;
 
 CREATE TABLE utilisateurs(
        username VARCHAR(15),
@@ -8,6 +6,7 @@ CREATE TABLE utilisateurs(
 	nom VARCHAR(32) NOT NULL,
 	prenom VARCHAR(32) NOT NULL,
 	email VARCHAR(32) NOT NULL,
+    imgUrl VARCHAR(7000) NOT NULL,
 	dateN DATE,
        PRIMARY KEY(username),
 	constraint emailUnique unique(email)

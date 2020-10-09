@@ -21,7 +21,7 @@ class ListM extends Component{
     }
 
     getLMsg = () => {
-        axios.get("http://localhost:8080/Projet/messages", {params:{
+        axios.get("https://birdy-em.herokuapp.com/messages", {params:{
             mur: this.props.acc,
             request: '',
             filtre: '',
@@ -36,10 +36,10 @@ class ListM extends Component{
     }
 
     delete = (idM) => {
-        axios.delete("http://localhost:8080/Projet/messages?idMessage=" + idM + "&id=" + this.props.acc+"&idRep=")
+        axios.delete("https://birdy-em.herokuapp.com/messages?idMessage=" + idM + "&id=" + this.props.acc+"&idRep=")
         .then(r => 
             {r.data.code !== undefined ? 
-                (r.data.code === "458"? 
+                ((r.data.code === "458" || r.data.code === "504")? 
                     this.timeOut()
                     :alert(r.data.code+": "+r.data.mess))
                 :this.getLMsg()})
