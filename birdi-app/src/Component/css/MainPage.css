@@ -114,6 +114,7 @@
     width: 50vw;
     max-width: 400px;
     border-radius: 35px;
+    cursor: pointer;
 }
 
 .message-button{

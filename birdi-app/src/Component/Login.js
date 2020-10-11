@@ -3,22 +3,28 @@ import React, { useState } from 'react'
 import './css/Login.css'
 import axios from './axios'
 
-function Login({ setId }) {
+function Login({ setId, setLoad }) {
     const logoB = "https://img.icons8.com/ios-filled/100/000000/crow.png"
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState(false)
 
     const connection = async (e) => {
-        e.preventDefault()
         const formData = new URLSearchParams();
         formData.append('login', userName)
         formData.append('password', password)
         await axios.post('/login', formData)
         .then (res => {res.data.code === undefined? setId(res.data.id):
             (res.data.code === '01'? setId(userName):
-                setError(true))})
-        .catch(err => console.log(err))
+            setError(true))})
+            .catch(err => console.log(err))
+            setLoad('')
+        }
+        
+    const handleClick= (e) => {
+        e.preventDefault()    
+        setLoad('load')
+        connection()
     }
 
     return (
@@ -40,12 +46,12 @@ function Login({ setId }) {
                 value={password}
                 onChange={ e => setPassword(e.target.value)}
                 onKeyDown={ e => {if (e.key === 'Enter') {
-                    connection(e)}}}
+                    handleClick(e)}}}
                 autoComplete="current-password"
                 />
             {error?<b>Username and/or Password are incorrect</b>:""}
             <div className="log__bouton">
-                <span onClick={connection}>Login</span>
+                <span onClick={handleClick}>Login</span>
                 <span onClick={() => setId('new')}>Sign up</span>
             </div>
         </div>

@@ -13,12 +13,16 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mongodb.BasicDBObject;
+import com.mongodb.Block;
 import com.mongodb.DBObject;
 import com.mongodb.QueryBuilder;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Projections;
+import com.mongodb.client.model.Sorts;
 
 import bd.Database;
 
@@ -54,6 +58,24 @@ public class Messages {
 		}
 		cursor.close();
 		return result;
+	}
+	
+	public static JSONArray search(String s){
+		JSONArray list = new JSONArray();
+		Block<Document> printBlock = new Block<Document>() {
+		        @Override
+		        public void apply(final Document document) {
+		            list.put(document.toJson());
+		        }
+		    };
+
+		MongoDatabase db = Database.getMongoDBConnection();
+		MongoCollection<Document> coll = db.getCollection(messaget);
+	    
+	    coll.find(Filters.text(s))
+	            .projection(Projections.metaTextScore("score"))
+	            .sort(Sorts.metaTextScore("score")).forEach(printBlock);
+		return list;
 	}
 	
 	public static List<String> getMur (List<String> lami){

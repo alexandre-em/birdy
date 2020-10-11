@@ -2,7 +2,7 @@ import React from 'react'
 import MessageContainer from './Message'
 import moment from 'moment'
 
-function ListeMessage({ id, mur, timeOut, setUser, setActive, rmMsg, setIdMsg }) {
+function ListeMessage({ id, mur, timeOut, setUser, setActive, rmMsg, setIdMsg, setLoad }) {
     const murPr = mur.sort((a, b) => b.date.$date - a.date.$date).map((val, i) => {
         return <MessageContainer
             key={val._id.$oid}
@@ -20,7 +20,9 @@ function ListeMessage({ id, mur, timeOut, setUser, setActive, rmMsg, setIdMsg })
             setUser={setUser}
             setActive={setActive}
             setIdMsg={setIdMsg}
-            rmMsg={rmMsg} />
+            rmMsg={rmMsg}
+            setLoad={setLoad}
+             />
     })
     return (
         <div className="main__messages">

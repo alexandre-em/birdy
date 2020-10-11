@@ -7,7 +7,7 @@ import ListeFollower from './ListeFollower'
 import ListeMessage from './ListeMessage'
 import { ArrowBack } from '@material-ui/icons'
 
-function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
+function Profile({ id, timeOut, user, setUser, setActive, load, setLoad, setIdMsg, idMsg }) {
     const [nom, setNom] = useState("")
     const [prenom, setPrenom] = useState("")
     const [dateN, setDateN] = useState("")
@@ -30,7 +30,7 @@ function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
     }
 
     const getInfoUser = () => {
-        setLoad('load')
+        setLoad('load','')
         axios.get('/user', {params: {
             username: user,
         }, data:{}})
@@ -38,12 +38,12 @@ function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
             var usr = res.data
             res.data.code === undefined ?
                 setInfo(usr.nom, usr.prenom, usr.dateN, usr.email, usr.imgUrl) : alert(usr.code + ': ' + usr.mess)
-            setLoad("")
+            setLoad("",'')
         })
     }
 
     const getFollower = () => {
-        setLoad('load')
+        setLoad('load','')
         axios.get('/friends', {params: {
             id: user,
             followed: '',
@@ -53,12 +53,12 @@ function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
             res.data.code === undefined ?
                 (usr.length===0?setFollowing([]):setFollowing(usr.split(', '))) :
                 console.log(res.data.code + ': ' + res.data.mess)
-            setLoad("")
+            setLoad("",'')
         })
     }
 
     const getFollowing =  () => {
-        setLoad('load')
+        setLoad('load','')
         axios.get('/friends', {params: {
             id: '',
             followed: user,
@@ -70,27 +70,27 @@ function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
                 res.data.code === '456'?
                     setFollower([]):
                     console.log(res.data.code + ': ' + res.data.mess)
-                setLoad("")
+                setLoad("",'')
         })
     }
 
     const addFriend = async (usr) => {
-        setLoad('load')
+        setLoad('load','')
         const formData = new URLSearchParams()
         formData.append('id', id)
         formData.append('ami', usr)
         axios.post('/friends', formData)
             .then( res => {
                 res.data.code === undefined?
-                    setFollower([...follower, usr]):
+                    setFollowing([...following, usr]):
                     ((res.data.code === '458' || res.data.code === '504')?
                         timeOut() : alert(res.data.code + ': ' + res.data.mess))
-                    setLoad("")
+                    setLoad("",'')
             })
     }
 
     const rmFriend = async (usr) => {
-        setLoad('load')
+        setLoad('load','')
         axios.delete('/friends?id='+id+'&ami='+usr)
         .then(res => {
             res.data.code === undefined ?
@@ -101,12 +101,12 @@ function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
                 ((res.data.code === '458' || res.data.code === '504')?
                     timeOut() :
                     alert(res.data.code + ': ' + res.data.mess))
-                setLoad("")
+                setLoad("",'')
         })
     }
 
     const rmMsg = async (idMsg) => {
-        setLoad('load')
+        setLoad('load','')
         axios.delete('/messages?idMessage='+idMsg+'&id='+id+'&idRep=')
             .then(res => {
                 res.data.code !== undefined?
@@ -114,37 +114,27 @@ function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
                         timeOut():
                         alert(res.data.code+': '+res.data.mess))
                     :alert("Message deleted")
-                setLoad("")
+                setLoad("",'')
                 })
     }
 
     const getMur = async () => {
-        setLoad('load')
+        setLoad('load','')
         await axios.get('/messages', {params:{
             id: "",
             request: user,
             filtre: "id_author",
-            mur: ""
+            mur: "",
+            search: '',
         }, data:{}
         })
         .then(res => { 
             res.data !== undefined ?
                 setMur(JSON.parse(res.data.id)):alert(res.data.code+ ": "+ res.data.mess)
-            setLoad("")
+            setLoad("",'')
         })
         .catch(err => alert(err))
     }
-
-    // useEffect(() => {
-    //     const pusher = new Pusher('2eba10f6abd744b48515', {
-    //         cluster: 'eu'
-    //       });
-      
-    //     const channel = pusher.subscribe('messages');
-    //       channel.bind('insert', (data) => {
-    //         getMur()
-    //       });
-    // })
 
     const handleClick = (fct) => {
         fct(user)
@@ -160,7 +150,6 @@ function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
         getFollower();
         getMur();
         getFollowing();
-        setListeAM("message")
         setBouton(!follower.includes(id))
         // eslint-disable-next-line
     }, [user])
@@ -192,13 +181,13 @@ function Profile({ id, timeOut, user, setUser, setActive, load, setLoad }) {
                 <div className="details-follow">
                     <span onClick={() => setListeAM("message")}><b>{mur.length}</b> posts</span>
                     <span onClick={() => setListeAM("follow")}><b>{following.length}</b> following</span>
-                    <span onClick={() => setListeAM("follower")}><b>{follower.length}</b> followers</span>
+                    <span onClick={() => setListeAM("follower")}><b>{follower.length}</b> follower</span>
                 </div>
             </div>
             
-                {listeAM==="message"?<ListeMessage id={id} mur={mur} timeOut={timeOut} setActive={setActive} setUser={setUser} rmMsg={rmMsg}/>:""}
+                {listeAM==="message"?<ListeMessage id={id} mur={mur} timeOut={timeOut} setActive={setActive} setUser={setUser} rmMsg={rmMsg} setLoad={setLoad} setIdMsg={setIdMsg}/>:""}
                 {listeAM==="follow"?<ListeFollow id={id} follow={following} timeOut={timeOut}setActive={setActive} setUser={setUser} rmFriend={rmFriend}/>:""}
-                {listeAM==="follower"?<ListeFollower id={id} follower={follower} timeOut={timeOut}setActive={setActive} setUser={setUser} addFriend={addFriend} rmFriend={rmFriend}/>:""}
+                {listeAM==="follower"?<ListeFollower id={id} follow={following} follower={follower} timeOut={timeOut}setActive={setActive} setUser={setUser} addFriend={addFriend} rmFriend={rmFriend}/>:""}
         </div>
     )
 }

@@ -3,8 +3,7 @@ import React, { useEffect, useState } from 'react'
 import './css/rightSide.css'
 import axios from './axios'
 
-function RightSideBar({ active, user,setUser, id, setActive }) {
-    const [search, setSearch] = useState("")
+function RightSideBar({ active, user,setUser, id, setActive, setLoad, search, setSearch, setclick }) {
 
     const [pic, setPic] = useState([])
 
@@ -13,7 +12,8 @@ function RightSideBar({ active, user,setUser, id, setActive }) {
             id: "",
             request: user,
             filtre: "id_author",
-            mur: ""
+            mur: "",
+            search: '',
         }, data:{}
         })
         .then(res => { 
@@ -23,7 +23,7 @@ function RightSideBar({ active, user,setUser, id, setActive }) {
                     var cpt = 0;
                     if(value.imgUrl!=="" && (cpt<7)){
                         cpt++
-                        return <img key={value._id.$oid} src={value.imgUrl} alt=""/>
+                        return <img key={value._id.$oid} src={value.imgUrl} alt="" onClick={() => setLoad("img", value.imgUrl)}/>
                     }
                 })):alert(res.data.code+ ": "+ res.data.mess)
         })
@@ -32,13 +32,12 @@ function RightSideBar({ active, user,setUser, id, setActive }) {
 
     const checkUser = (e) => {
         e.preventDefault()
-        setUser(search)
-        setActive('Profile')
-        setSearch('')
+        setclick(true)
+        setActive('Search')
     }
 
     useEffect(() => {
-        getMur()
+        if(active==="Profile") getMur()
         // eslint-disable-next-line
     }, [user])
 

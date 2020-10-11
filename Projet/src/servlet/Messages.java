@@ -17,8 +17,10 @@ public class Messages extends HttpServlet  {
 		String rq = req.getParameter("request");
 		String flt = req.getParameter("filtre");
 		String mur = req.getParameter("mur");
+
+		String search = req.getParameter("search");
 		
-		JSONObject j =services.Messages.choixGetMessage(id, rq, flt, mur);
+		JSONObject j =services.Messages.choixGetMessage(id, rq, flt, mur, search);
 		writer.println(j);
 	}
 	

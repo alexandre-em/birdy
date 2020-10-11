@@ -3,10 +3,23 @@ import MainPage from './MainPage'
 import Profile from './Profile'
 import SearchPage from './SearchPage'
 import Reply from './Reply'
+import axios from './axios'
 
-
-function PageSelect({ active, user, setUser, setActive, id, timeOut, load, setLoad}) {
+function PageSelect({ active, user, setUser, setActive, id, timeOut, load, setLoad, search, setSearch, click }) {
     const [idMsg, setIdMsg] = useState('')
+
+    const rmMsg = async (idMsg) => {
+        setLoad('load','')
+        axios.delete('/messages?idMessage='+idMsg+'&id='+id+'&idRep=')
+            .then(res => {
+                res.data.code !== undefined?
+                    ((res.data.code === '458' || res.data.code === '504')?
+                        timeOut():
+                        alert(res.data.code+': '+res.data.mess))
+                    :alert("Message deleted")
+                    setLoad('','')
+                })
+    }
 
     switch(active){
         case "Profile":
@@ -15,7 +28,7 @@ function PageSelect({ active, user, setUser, setActive, id, timeOut, load, setLo
             )
         case "Search":
             return (
-                <SearchPage timeOut={timeOut} setActive={setActive} load={load} setLoad={setLoad}/>
+                <SearchPage timeOut={timeOut} setActive={setActive} setLoad={setLoad} setUser={setUser} setIdMsg={setIdMsg} id={id} search={search} setSearch={setSearch} click={click}/>
             )
         case "Reply":
             return(
@@ -23,7 +36,7 @@ function PageSelect({ active, user, setUser, setActive, id, timeOut, load, setLo
             )
         default:
             return (
-                <MainPage id={id} timeOut={timeOut} user={user} setUser={setUser} setActive={setActive} load={load} setLoad={setLoad} setIdMsg={setIdMsg} idMsg={idMsg}/>
+                <MainPage rmMsg={rmMsg} id={id} timeOut={timeOut} user={user} setUser={setUser} setActive={setActive} load={load} setLoad={setLoad} setIdMsg={setIdMsg} idMsg={idMsg}/>
             )
     }
 }

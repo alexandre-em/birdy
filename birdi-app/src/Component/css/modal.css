@@ -79,3 +79,51 @@
         opacity: .01;
     }
 }
+
+.popup{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.popup{
+    z-index: 10000;
+}
+
+.popup__content{
+    position: relative;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.img > span{
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bolder;
+    margin-top: -35px;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+ .img {
+    position: absolute;
+    z-index: 1000;
+}
+.img > img {
+    height: 70vh;
+}
+
+
+@media(max-width: 1276px){
+    .img > img {
+        width: 80vw;
+        height: auto;
+    }
+  }
+
+@media(max-width: 500px){
+    .img > img {
+        width: 100vw;
+        height: auto;
+    }
+}

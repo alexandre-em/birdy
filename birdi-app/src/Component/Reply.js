@@ -19,12 +19,13 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
     })
 
     const getMessage = async () => {
-        setLoad('load')
+        setLoad('load', '')
         await axios.get('/messages', {params:{
             id: idMsg,
             request: "",
             filtre: "",
-            mur: ""
+            mur: "",
+            search:"",
         }, data:{}
         })
         .then(res => { 
@@ -33,13 +34,13 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
             } else {
                 alert(res.data.code+ ": "+ res.data.mess)
             }
-                setLoad('')
+                setLoad('', '')
         })
         .catch(err => alert(err+" "+id))
     } 
 
     const getInfoUser = () => {
-        setLoad('load')
+        setLoad('load', '')
         axios.get('/user', {params: {
             username: id,
         }, data:{}})
@@ -47,7 +48,7 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
             var usr = res.data
             res.data.code === undefined ?
                 setAvatar(usr.imgUrl) : alert(usr.code + ': ' + usr.mess)
-                setLoad('')
+                setLoad('', '')
         })
     }
 
@@ -89,7 +90,7 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
     }
 
     const postComment = async (url) => {
-        if(load!=='load') setLoad('load')
+        if(load!=='load') setLoad('load', '')
         const formData = new URLSearchParams();
         formData.append('id', id)
         formData.append('Message', '@'+rep.id_author+' '+comment)
@@ -101,13 +102,13 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
                 ((res.data.code === "458" || res.data.code === "504")?
                     timeOut() : alert(res.data.code + ": " + res.data.mess))
                     : alert("Message envoye !")
-                    setLoad('')
+                    setLoad('', '')
         })
         setComment("")
     }
 
     const rmMsg = async (idRep) => {
-        setLoad('load')
+        setLoad('load', '')
         axios.delete('/messages?idMessage='+idMsg+'&id='+id+'&idRep='+idRep)
             .then(res => {
                 res.data.code !== undefined?
@@ -115,7 +116,7 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
                         timeOut():
                         alert(res.data.code+': '+res.data.mess))
                     :alert("Message deleted")
-                    setLoad('')
+                    setLoad('', '')
                 })
     }
 
@@ -125,7 +126,7 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
     }
 
     const handleUpload = () => {
-        setLoad('load')
+        setLoad('load', '')
         const uploadTask = storage.ref(`images/${image.name}`).put(image)
 
         uploadTask.on(
@@ -169,6 +170,7 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
                 setUser={setUser}
                 setActive={setActive}
                 setIdMsg={setIdMsg}
+                setLoad={setLoad}
                 rmMsg={rmMsg} />
             <div className="main__form">
                 <Avatar alt="" style={{width:"50px", height:"50px"}} src={avatar} />
@@ -207,7 +209,7 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
                     </form>
                 </div>
             </div>
-            <ListeMessage id={id} mur={rep.comment.map((value) =>{ return JSON.parse(value)})} timeOut={timeOut} setUser={setUser} setActive={setActive} rmMsg={rmMsg} setIdMsg={setIdMsg}/>
+            <ListeMessage id={id} mur={rep.comment.map((value) =>{ return JSON.parse(value)})} timeOut={timeOut} setUser={setUser} setActive={setActive} rmMsg={rmMsg} setLoad={setLoad} setIdMsg={setIdMsg}/>
         </div>
     )
 }

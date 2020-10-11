@@ -3,7 +3,7 @@ import { ChatBubbleOutline, Favorite, FavoriteBorder, Share,  Delete } from '@ma
 import { Avatar, IconButton } from '@material-ui/core'
 import axios from './axios'
 
-function MessageContainer({ idMsg, prenom, id, id_author, date, text, avatar, image, comment, like, timeOut, setUser, setActive, rmMsg, setIdMsg}) {
+function MessageContainer({ idMsg, prenom, id, id_author, date, text, avatar, image, comment, like, timeOut, setUser, setActive, rmMsg, setIdMsg, setLoad}) {
 
     const [fav, setFav] = useState(like.includes(id))
     const [nbFav, setNbFav] = useState(like.length)
@@ -51,7 +51,7 @@ function MessageContainer({ idMsg, prenom, id, id_author, date, text, avatar, im
                 </div>
                 <div className="message-container">
                     <p>{text}</p>
-                    {image!==""?<img src={image} alt=""/>:""}
+                    {image!==""?<img src={image} alt="" onClick={() => setLoad("img", image)}/>:""}
                 </div>
                 <div className="message-button">
                     <span>

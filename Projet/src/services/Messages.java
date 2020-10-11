@@ -10,12 +10,19 @@ import org.json.JSONObject;
 public class Messages {
 	
 
-	public static JSONObject choixGetMessage(String id, String requete, String filtre, String mur) {
+	public static JSONObject choixGetMessage(String id, String requete, String filtre, String mur, String search) {
 		if (id=="") {
 			if(mur!="")
 				return getMur(mur);
 			else
-				return listMessage(requete, filtre);
+				if(requete!="")
+					return listMessage(requete, filtre);
+				else
+					try {
+						return new JSONObject().put("result", tools.Messages.search(search));
+					} catch (JSONException e) {
+						return tools.ErrorJSON.serviceRefused(e.getMessage(), "1000");
+					}
 		} else
 			return getMessage(id);
 	}

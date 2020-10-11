@@ -42,7 +42,7 @@ function Follower({ id, follow , setActive, setUser, timeOut, addFriend, rmFrien
     useEffect(() => {
         getInfos()
         // eslint-disable-next-line
-    }, [follow])
+    }, [])
 
     return (
         <div className="ami">

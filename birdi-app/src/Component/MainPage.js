@@ -7,7 +7,7 @@ import ListeMessage from './ListeMessage'
 import axios from './axios'
 import Pusher from 'pusher-js'
 
-function MainPage({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, setIdMsg}) {
+function MainPage({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, setIdMsg, rmMsg}) {
     const [comment, setComment] = useState('')
     const [image, setImage] = useState(null)
     const [send, setSend] = useState(false)
@@ -16,18 +16,19 @@ function MainPage({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg,
     const [mur, setMur] = useState([])
 
     const getMessageList = async () => {
-        setLoad('load')
+        setLoad('load','')
         await axios.get('/messages', {params:{
             id: "",
             request: "",
             filtre: "",
-            mur: id
+            mur: id,
+            search: '',
         }, data:{}
         })
         .then(res => { 
             res.data.code === undefined ?
                 setMur(JSON.parse(res.data.id)):alert(res.data.code+ ": "+ res.data.mess)
-                setLoad('')
+                setLoad('','')
         })
         .catch(err => alert(err+" "+id))
     } 
@@ -41,7 +42,7 @@ function MainPage({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg,
             var usr = res.data
             res.data.code === undefined ?
                 setAvatar(usr.imgUrl) : alert(usr.code + ': ' + usr.mess)
-                setLoad('')
+                setLoad('','')
         })
     }
 
@@ -82,7 +83,7 @@ function MainPage({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg,
     }
 
     const postComment = async (url) => {
-        if(load!=='load') setLoad('load')
+        if(load!=='load') setLoad('load','')
         const formData = new URLSearchParams();
         formData.append('id', id)
         formData.append('Message', comment)
@@ -94,22 +95,9 @@ function MainPage({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg,
                 ((res.data.code === "458" || res.data.code === "504")?
                     timeOut() : alert(res.data.code + ": " + res.data.mess))
                     : alert("Message envoye !")
-                    setLoad('')
+                    setLoad('','')
         })
         setComment("")
-    }
-
-    const rmMsg = async (idMsg) => {
-        setLoad('load')
-        axios.delete('/messages?idMessage='+idMsg+'&id='+id+'&idRep=')
-            .then(res => {
-                res.data.code !== undefined?
-                    ((res.data.code === '458' || res.data.code === '504')?
-                        timeOut():
-                        alert(res.data.code+': '+res.data.mess))
-                    :alert("Message deleted")
-                    setLoad('')
-                })
     }
 
     const handleSubmit = (e) => {
@@ -118,7 +106,7 @@ function MainPage({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg,
     }
 
     const handleUpload = () => {
-        setLoad('load')
+        setLoad('load','')
         const uploadTask = storage.ref(`images/${image.name}`).put(image)
 
         uploadTask.on(
@@ -185,7 +173,7 @@ function MainPage({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg,
                     </form>
                 </div>
             </div>
-            <ListeMessage id={id} mur={mur} timeOut={timeOut} setUser={setUser} setActive={setActive} rmMsg={rmMsg} setIdMsg={setIdMsg}/>
+            <ListeMessage id={id} mur={mur} timeOut={timeOut} setUser={setUser} setActive={setActive} rmMsg={rmMsg} setIdMsg={setIdMsg} setLoad={setLoad}/>
         </div>
     )
 }
