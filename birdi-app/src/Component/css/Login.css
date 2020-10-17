@@ -3,6 +3,7 @@
     place-items: center;
     height: 50vh;
     padding-top: 25px;
+    color: var(--fontcolor);
 }
 .login > h4 {
     color : rgb(160, 160, 160);
@@ -10,6 +11,14 @@
 
 .login > b {
     color : rgba(133, 49, 49, 0.63);
+}
+.login.dark > img{
+    filter:invert(.80);
+    -webkit-filter: invert(.80);
+}
+.login.dark > div > label,
+.login.dark > div > div > input{
+    color : var(--fontcolor)
 }
 
 .login > .MuiFormControl-root {
@@ -27,6 +36,7 @@
     background-color: rgb(112, 167, 199);
     color:#eeeeee;
     border-radius: 25px;
+    font-size: smaller;
     padding: 10px 35px 10px 35px;
     transition: 350ms;
     cursor: pointer;

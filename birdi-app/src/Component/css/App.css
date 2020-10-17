@@ -3,12 +3,26 @@
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+*::-webkit-scrollbar {
+  display: none;
+}
 
 body{
-  background-color: #ebebebeb;
+  --backcolor: #ebebebeb;
+  --traitcolor: #b4b4b4;
+  --fontcolor: rgb(34, 40, 44);
+  --barcolor : #c8d2d3eb;
 
+  background-color: var(--backcolor);
   color: rgb(34, 40, 44);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+body.dark{
+  --backcolor: rgb(21, 32, 43);
+  --traitcolor: rgb(37, 51, 65);
+  --fontcolor: rgb(251, 251, 251);
+  --barcolor: rgb(47, 64, 82);
 }
 
 .App {
@@ -43,7 +57,7 @@ body{
     padding-right: 10px;
     font-weight: bolder;
     font-size: 14pt;
-    color: #ebebebeb;
+    color: var(--backcolor);
     cursor: default;
   } 
   .menu-hamb{
@@ -57,7 +71,7 @@ body{
   .menu-hamb > div {
     width: 35px;
     height: 5px;
-    background-color: #ebebebeb;
+    background-color: var(--backcolor);
     margin: 6px 0;
   }
 }
@@ -68,7 +82,7 @@ body{
   .App > .left {
     justify-self: start;
     position: fixed;
-    background-color: #c8d2d3eb;
+    background-color: var(--barcolor) ;
     height: 100vh;
     z-index: 1000;
   } 

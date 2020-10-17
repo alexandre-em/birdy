@@ -10,7 +10,8 @@
 .tab{
     padding: 15px 0 7px 15px;
     display: flex;
-    border-bottom: 1px solid #b4b4b4;;
+    border-bottom: 1px solid var(--traitcolor);
+    color: var(--fontcolor);
     justify-content: space-evenly;
 }
 

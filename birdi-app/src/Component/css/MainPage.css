@@ -1,16 +1,18 @@
 .mainPage{
-    border: 1px solid #b4b4b4;
+    border: 1px solid var(--traitcolor);
+    border-top: none;
     min-width: 600px;
 }
 
 .rep {
-    border-bottom: 1px solid #d0d5d6;
+    border-bottom: 1px solid var(--traitcolor);
 }
 
 .main__header {
     padding: 15px;
     display:flex;
     align-content: center;
+    color: var(--fontcolor);
 }
 .main__header > .MuiSvgIcon-root{
     cursor: pointer;
@@ -30,8 +32,8 @@
     display: grid;
     grid-template-columns: max-content auto;
     padding: 10px 5px 5px 10px;
-    border: 1px solid #b4b4b4;
-    border-bottom: 13px solid #d0d5d6;
+    border: 1px solid var(--traitcolor);
+    border-bottom: 13px solid var(--traitcolor);
     border-left: none;
     border-right: none;
     overflow: hidden;
@@ -44,9 +46,9 @@
     padding:10px;
     overflow: hidden;
     overflow-wrap: break-word;
-    background-color: #eeeeee;
+    background-color: var(--backcolor);
     font-size: 12pt;
-    color: rgb(66, 79, 87);
+    color: var(--fontcolor);
     
     border:none;
     min-width: 90%;
@@ -85,12 +87,16 @@
     background-color: rgb(51, 126, 170);
 }
 
+.main__messages > div > b {
+    color: var(--fontcolor)
+}
+
 .message{
     padding: 10px;
     display: grid;
     grid-template-columns: max-content 85%;
-    border-bottom: 1px solid #b4b4b4;
-
+    border-bottom: 1px solid var(--traitcolor);
+    color: var(--fontcolor);
     overflow: hidden;
 }
 .message > .MuiAvatar-root{
@@ -120,6 +126,14 @@
 .message-button{
     display: flex;
     justify-content: space-between;
+}
+
+.message-button > span > button {
+    color: var(--fontcolor);
+}
+
+.message-button  > button {
+    color: var(--fontcolor);
 }
 
 .message-button > span {

@@ -17,6 +17,7 @@
 .title > span {
     font-weight: bolder;
     font-size: 14pt;
+    color: var(--fontcolor);
 }
 
 .title > img {
@@ -29,15 +30,21 @@
 .title > img:hover{
     background-color: rgba(57, 136, 182, 0.1);
 }
+
+.title.dark > img{
+    filter:invert(.80);
+    -webkit-filter: invert(.80);
+}
 .left__menu-item{
     display: flex;
     place-items: center;
     padding:10px;
     transition: 350ms;
     border-radius: 50px;
-    color: rgb(34, 40, 44);
+    color: var(--fontcolor);
     cursor: pointer;
 }
+
 .left__menu-item.git{
     color: rgb(143, 71, 143);
 }

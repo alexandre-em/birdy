@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import './css/Login.css'
 import axios from './axios'
 
-function Login({ setId, setLoad }) {
+function Login({ setId, setLoad, theme }) {
     const logoB = "https://img.icons8.com/ios-filled/100/000000/crow.png"
     const [userName, setUserName] = useState("")
     const [password, setPassword] = useState("")
@@ -28,7 +28,7 @@ function Login({ setId, setLoad }) {
     }
 
     return (
-        <div className="login">
+        <div className={`login ${theme?"":"dark"}`}>
             <img src={logoB} alt="" />
             <h1>Login to Birdy</h1>
             <h4>Demo log/pass: "demo"</h4>

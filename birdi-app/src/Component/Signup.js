@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import './css/Signup.css'
 import axios from './axios'
 
-function Signup({ setId, setLoad }) {
+function Signup({ setId, setLoad, theme}) {
     const logoB = "https://img.icons8.com/ios-filled/100/000000/crow.png"
     const [userName, setUserName] = useState("")
     const [nom, setNom] = useState("")
@@ -68,7 +68,7 @@ function Signup({ setId, setLoad }) {
     }
 
     return (
-        <div className="signup">
+        <div className={`signup ${theme?"":"dark"}`}>
             <div className="signup__header">
                 <img src={logoB} alt="" />
                 <h1>Create an account</h1>

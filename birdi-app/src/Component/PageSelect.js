@@ -4,8 +4,9 @@ import Profile from './Profile'
 import SearchPage from './SearchPage'
 import Reply from './Reply'
 import axios from './axios'
+import Notif from './Notif'
 
-function PageSelect({ active, user, setUser, setActive, id, timeOut, load, setLoad, search, setSearch, click }) {
+function PageSelect({ active, user, setUser, setActive, id, timeOut, load, setLoad, search, setSearch, click, notif }) {
     const [idMsg, setIdMsg] = useState('')
 
     const rmMsg = async (idMsg) => {
@@ -33,6 +34,10 @@ function PageSelect({ active, user, setUser, setActive, id, timeOut, load, setLo
         case "Reply":
             return(
                 <Reply id={id} timeOut={timeOut} user={user} setUser={setUser} setActive={setActive} load={load} setLoad={setLoad} setIdMsg={setIdMsg} idMsg={idMsg}/>
+            )
+        case "Notification":
+            return(
+                <Notif id={id} setActive={setActive} setUser={setUser} timeOut={timeOut} setIdMsg={setIdMsg} notif={notif}/>
             )
         default:
             return (

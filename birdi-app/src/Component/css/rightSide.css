@@ -4,14 +4,16 @@
 .rightSideBar > h3 {
     display: flex;
     justify-content: center;
+    color: var(--fontcolor)
 }
 .searchbar > form{
     display: flex;
     align-items: center;
-    background-color:  #dadada;
+    background-color:  var(--traitcolor);
     width: 55%;
     min-width: 220px;
     padding: 10px;
+    color: var(--fontcolor);
     border-radius: 25px;
 }
 
@@ -20,7 +22,8 @@
     width: 80%;
     outline-style: none;
     outline-width: 0;
-    background-color:  #dadada;
+    background-color:  var(--traitcolor);
+    color: var(--fontcolor);
     border: none;
 }
 
@@ -44,7 +47,7 @@
     width: 120px;
     padding-bottom: 2px;
     padding-left: 2px;
-    background-color: lightgray;
+    background-color: var(--backcolor);
     cursor: pointer;
 }
 

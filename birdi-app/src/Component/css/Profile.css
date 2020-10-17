@@ -4,7 +4,7 @@
     height: 200px;
     background-position: 75% 30%;
 
-    border: 1px solid #b4b4b4;
+    border: 1px solid var(--traitcolor);
     border-left: none;
     border-right: none;
 }
@@ -17,7 +17,7 @@
 .profile__picture > .MuiAvatar-root{
     margin-left: 15px;
     margin-top: -90px;
-    border: 3.5px solid #ebebebeb;
+    border: 3.5px solid var(--backcolor);
     width: 150px;
     height: 150px;
 }
@@ -50,7 +50,8 @@
 .profile__details{
     padding-left: 15px;
     padding-bottom: 10px;
-    border-bottom: 1px solid #b4b4b4;
+    border-bottom: 1px solid var(--traitcolor);
+    color: var(--fontcolor);
 }
 .details-name{
     padding-bottom: 7px;

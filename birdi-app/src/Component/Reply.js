@@ -2,7 +2,8 @@ import { Avatar, IconButton } from '@material-ui/core'
 import React, { useState, useEffect} from 'react'
 import axios from './axios'
 import Pusher from 'pusher-js'
-import { storage } from './firebase'
+import { db, storage } from './firebase'
+import firebase from 'firebase'
 import { Image } from '@material-ui/icons'
 import MessageContainer from './Message'
 import moment from 'moment'
@@ -89,6 +90,21 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
         }
     }
 
+    const reply = () => {
+        db.collection("notifications")
+            .doc(rep.id_author)
+            .collection("reply")
+            .add({
+                idMsg: idMsg,
+                message: comment,
+                author: id,
+                avatar: avatar,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            })
+        alert("Message envoye !")
+        setComment("")
+    }
+
     const postComment = async (url) => {
         if(load!=='load') setLoad('load', '')
         const formData = new URLSearchParams();
@@ -101,10 +117,9 @@ function Reply({ id, timeOut, user, setUser, setActive ,load, setLoad, idMsg, se
             res.data.code !== undefined ? 
                 ((res.data.code === "458" || res.data.code === "504")?
                     timeOut() : alert(res.data.code + ": " + res.data.mess))
-                    : alert("Message envoye !")
+                    : reply()
                     setLoad('', '')
         })
-        setComment("")
     }
 
     const rmMsg = async (idRep) => {
