@@ -12,7 +12,7 @@ Site Web de type social inspire de Twitter en monopage. (à améliorer)
 
 
 ## Pour Lancer/Installer :
-- Bases de données: [Docker](docker/README.md)
+- API: [Docker](docker/README.md)
 - Lancer le site: [React](myapp/README.md)
 
 ## Nouvelle version cote client (09/10/2020)
